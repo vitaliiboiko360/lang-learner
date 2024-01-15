@@ -6,7 +6,7 @@ const PORT = 4001;
 module.exports = {
   entry: {
     app: [
-      './js/main.jsx',
+      './js/main.tsx',
     ],
   },
   output: {
