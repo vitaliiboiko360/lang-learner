@@ -28,9 +28,19 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
     liItems.current.forEach((li) => {
       if (li != null) {
         var style = window.getComputedStyle(li);
-        console.log(style['display']);
-        // Object.keys(style).forEach(function (key) {
-        //   var val = style[key];
+        //console.log(style['display']);
+        if (li.value === value) {
+          li.style['display'] = 'list-item';
+          console.log(`activated ${value} value`);
+          console.log(li.style['display']);
+          return;
+        }
+
+        li.style['display'] = (style['display'] === 'none') ? 'list-item' : 'none';
+
+        // console.log(parseFloat(li.value).toFixed(2));
+        // Object.keys(li).forEach(function (key) {
+        //   var val = li[key];
         //   console.log(val);
         // });
         // if (style.getAttribute('display') === 'none') {
