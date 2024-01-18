@@ -4,65 +4,50 @@ import { forwardRef } from 'react';
 import SpeedIcon from '@mui/icons-material/Speed';
 
 const valuesArrayLength = 3;
+const values = [1.0, 0.85, 0.7];
+const ulElementStyle = {
+  'listStyle': 'none',
+  'fontSize': '1.5em',
+}
 
 const PlaybackRateDropdown = forwardRef((props, ref) => {
-  const [playbackSpeed, setPlaybackSpeed] = React.useState(1.0);
-
-  const handleChange = (value) => {
-    setPlaybackSpeed(value);
-    ref.current.playbackRate = value;
-  };
-
   const liItems = React.useRef(null);
+
+  let playbackRate = ref.current ? ref.current.playbackRate : 1;
 
   function getRefArray() {
     if (!liItems.current) {
-      liItems.current = new Array();
+      liItems.current = new Array(valuesArrayLength);
     }
     return liItems.current;
   }
 
+  React.useEffect(() => {
+    playbackRate = ref.current ? ref.current.playbackRate : 1;
+  }, [playbackRate]);
+
   const onClick = (value) => {
-    // console.log(value);
-    // console.log(liItems);
     liItems.current.forEach((li) => {
       if (li != null) {
         var style = window.getComputedStyle(li);
-        //console.log(style['display']);
-        if (li.value === value) {
-          li.style['display'] = 'list-item';
-          console.log(`activated ${value} value`);
-          console.log(li.style['display']);
+
+        if (li.getAttribute('data-value') == value) {
+          li.style.display = 'list-item';
+          if (ref.current) { ref.current.playbackRate = value; }
           return;
         }
-
-        li.style['display'] = (style['display'] === 'none') ? 'list-item' : 'none';
-
-        // console.log(parseFloat(li.value).toFixed(2));
-        // Object.keys(li).forEach(function (key) {
-        //   var val = li[key];
-        //   console.log(val);
-        // });
-        // if (style.getAttribute('display') === 'none') {
-        //   console.log(li);
-        // }
-        // li.style.setAttribute('display', 'list-item');
+        li.style.display = (style.display === 'none') ? 'list-item' : 'none';
       }
     });
   };
 
-  const values = [1.0, 0.85, 0.7];
-  const style = {
-    'listStyle': 'none',
-    'fontSize': '1.5em',
-  }
   return (
     <>
       <div>
         <SpeedIcon>Playback Speed</SpeedIcon>
       </div>
       <div>
-        <ul style={style}>
+        <ul style={ulElementStyle}>
           {/* <li value={1.0}>1.0</li>
           <li value={0.85}>0.85</li>
           <li value={0.7}>0.7</li> */}
@@ -70,7 +55,7 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
             return (<li ref={(liItemRef) => {
               const liArray = getRefArray();
               liArray[index] = liItemRef;
-            }} style={(value != playbackSpeed) ? { 'display': 'none' } : {}} onClick={() => onClick(value)} value={value} key={index}>{value}</li>)
+            }} style={(value != playbackRate) ? { 'display': 'none' } : {}} onClick={() => onClick(value)} data-value={value} key={index}>{value}</li>)
           })}
         </ul>
       </div >
