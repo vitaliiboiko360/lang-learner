@@ -48,14 +48,17 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
       </div>
       <div>
         <ul style={ulElementStyle}>
-          {/* <li value={1.0}>1.0</li>
-          <li value={0.85}>0.85</li>
-          <li value={0.7}>0.7</li> */}
           {values.map((value, index) => {
-            return (<li ref={(liItemRef) => {
-              const liArray = getRefArray();
-              liArray[index] = liItemRef;
-            }} style={(value != playbackRate) ? { 'display': 'none' } : {}} onClick={() => onClick(value)} data-value={value} key={index}>{value}</li>)
+            return (<li
+              ref={(liItemRef) => {
+                const liArray = getRefArray();
+                liArray[index] = liItemRef;
+              }}
+              style={(value != playbackRate) ? { 'display': 'none' } : {}}
+              onClick={() => onClick(value)}
+              data-value={value}
+              key={index}
+            >{value}</li>)
           })}
         </ul>
       </div >
