@@ -41,6 +41,7 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
     });
   };
 
+  const styleObj = { 'paddingLeft': '2em', 'position': 'relative' };
   return (
     <>
       <div>
@@ -54,7 +55,7 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
                 const liArray = getRefArray();
                 liArray[index] = liItemRef;
               }}
-              style={(value != playbackRate) ? { 'display': 'none' } : {}}
+              style={(value != playbackRate) ? { ...styleObj, ...{ 'display': 'none' } } : styleObj}
               onClick={() => onClick(value)}
               data-value={value}
               key={index}
