@@ -32,11 +32,11 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
         var style = window.getComputedStyle(li);
 
         if (li.getAttribute('data-value') == value) {
-          li.style.display = 'list-item';
+          li.style.display = 'table-cell';
           if (ref.current) { ref.current.playbackRate = value; }
           return;
         }
-        li.style.display = (style.display === 'none') ? 'list-item' : 'none';
+        li.style.display = (style.display === 'none') ? 'table-cell' : 'none';
       }
     });
   };
