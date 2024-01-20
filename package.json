@@ -11,7 +11,8 @@
     "build:d.ts": "tsc",
     "watch": "webpack --progress --watch",
     "prepare": "npm run build && npm run build:d.ts",
-    "start": "webpack-dev-server --progress"
+    "start": "webpack-dev-server --progress",
+    "tsc": "tsc"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.9",

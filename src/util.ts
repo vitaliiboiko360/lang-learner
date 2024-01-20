@@ -11,9 +11,9 @@ export function formatDuration(value: number) {
 }
 
 export function makeUrlToResource(resource) {
-  return `http://192.168.1.12:4001/${resource}`;
+  return `/${resource}`;
 }
 
 export function makeUrlToArtwork(artwork) {
-  return `http://192.168.1.12:4001/data/${artwork}.png`;
+  return `/data/${artwork}.png`;
 }

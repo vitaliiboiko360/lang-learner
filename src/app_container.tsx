@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       try {
         const data = await queryClient.fetchQuery([resource],
           async () => {
-            const response = await fetch(`http://192.168.1.12:4001/data/${resource}.json`)
+            const response = await fetch(`/data/${resource}.json`)
             if (!response.ok) {
               throw new Error(response.statusText);
             }
