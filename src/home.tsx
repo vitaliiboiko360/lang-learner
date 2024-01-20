@@ -6,8 +6,9 @@ import HomeEntry from './home_entry';
 import { makeUrlToResource } from './util.ts'
 
 export default function Home() {
+  //var host = document.location.host;
   const { isLoading, error, data } = useQuery('homeData', () =>
-    fetch('http://192.168.1.12:4001/data/list_of_texts.json').then(res =>
+    fetch(`http://${host}/data/list_of_texts.json`).then(res =>
       res.json()
     )
   );
