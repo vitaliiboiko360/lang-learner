@@ -1,3 +1,57 @@
+.title{
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+}
+.title::first-letter{
+  color: var(--blue);
+  font-size: 2.5rem;
+}
+.btn{
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--grey);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  position: relative;
+  border-radius: 2px;
+}
+.btn::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: var(--blue);
+  height: 0;
+  transition: all .1s linear;
+}
+.btn:hover::before{
+  height: 2px;
+  transition: all .1s linear;
+}
+.btn-sm {
+  padding: 0.4rem 0.4rem;
+  font-size: 0.8rem;
+}
+.btn > span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn svg{
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: var(--blue)
+}
+.btn span+svg,
+.btn svg + span {
+  margin-left: 10px;
+}
 .home-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -22,10 +76,6 @@
 
 .home-title {
   display: grid;
-}
-
-body {
-  font-family: 'Roboto';
 }
 
 @media only screen and (min-width: 50em) {
@@ -68,4 +118,10 @@ body {
   max-width: 333px;
   flex: 270px;
   margin-bottom: 33px;
+}
+.btn-back-home{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
 }
