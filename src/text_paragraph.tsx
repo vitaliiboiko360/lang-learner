@@ -78,7 +78,7 @@ export default function TextParagraph(props) {
       let portionOfLength = lineLength / values.deltaX;
       let durationOfAnimation = Math.ceil(length / portionOfLength);
       return addSVGElemenReturnAnime('rect', svgRef.current, {
-        'x': values.x, 'y': values.y, 'stroke-width': '1', 'stroke': '#33adff', 'width': '0', 'height': '1px', 'rx': '1px', 'ry': '1px'
+        'x': values.x, 'y': values.y, 'stroke-width': '1', 'stroke': 'var(--blue)', 'width': '0', 'height': '1px', 'rx': '1px', 'ry': '1px'
       }, `${durationOfAnimation}s`, values.deltaX);
     });
 
@@ -140,7 +140,11 @@ export default function TextParagraph(props) {
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
-      <span ref={spanRef} style={{ fontSize: 26, display: 'inline', }} onClick={onClick}>{wordsInSpans}</span>
+      {
+        props.index === 0 
+        ? <h2 ref={spanRef} className={ 'title'} onClick={onClick}>{wordsInSpans}</h2> 
+        : <span ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
+      }
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >
   </>);

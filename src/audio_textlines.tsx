@@ -5,8 +5,6 @@ import TextLines from './text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
 import BackHomeButton from './back_home_button.tsx';
 
-import { Link } from 'react-router-dom';
-
 import {
   useLoaderData,
 } from "react-router-dom";
@@ -49,7 +47,7 @@ export default function AudioTextLines() {
   return (
     <>
       <Container sx={{ marginTop: '30px' }}>
-        <Link style={{ textDecoration: 'none', marginBottom: '30px', color: 'inherit' }} to="/"><BackHomeButton /></Link>
+        <BackHomeButton />
         <PlaybackRateDropdown ref={audioRef} />
         <TextLines
           onClick={onClickUserPlayNewStart} />
