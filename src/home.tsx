@@ -8,7 +8,7 @@ import { makeUrlToResource } from './util.ts'
 export default function Home() {
   //var host = document.location.host;
   const { isLoading, error, data } = useQuery('homeData', () =>
-    fetch(`http://${host}/data/list_of_texts.json`).then(res =>
+    fetch(`data/list_of_texts.json`).then(res =>
       res.json()
     )
   );
