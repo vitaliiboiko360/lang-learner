@@ -2,7 +2,7 @@ import React from 'react';
 
 import SliderAudioPlayseek from './slider_audio_playseek.tsx';
 import Audio from './audio.tsx';
-import PlayPauseButton from './play_pause_button.tsx'
+import PlayPauseButton from './various_controls/play_pause_button.tsx'
 
 import { toFixed } from './util.ts'
 
