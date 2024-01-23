@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from './store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from './store/activeIndexSlice.ts';
+import SubStartEndTime from './text_page/SubStartEndTime.tsx'
+import ConditionalLineBreak from './text_page/ConditionalLineBreak.tsx'
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
 function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {
@@ -130,31 +132,16 @@ export default function TextParagraph(props) {
     return <span key={index + 1}>{w + ' '}</span>;
   });
 
-
-  function ConditionalLineBreak(props) {
-    if (props.endParagraph)
-      return (<><br /><br /></>);
-    return (<></>)
-  }
-
-  function SubTime(props) {
-    const localClassName = (props.value == 0 && props.force != true) ? 'unassigned' : props.className;
-    const className = `sub ${localClassName}`;
-    return (
-      <sub className={className}>{props.value}</sub>
-    );
-  }
-
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
-      <SubTime
+      <SubStartEndTime
         force={props.index == 0 ? true : false}
         className="start"
         value={props.start}
       />
       <span ref={spanRef} style={{ fontSize: 26, display: 'inline', }} onClick={onClick}>{wordsInSpans}</span>
-      <SubTime
+      <SubStartEndTime
         className="end"
         value={props.end}
       />
