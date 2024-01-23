@@ -15,6 +15,8 @@ function ClickableLine(props) {
     length={props.end - props.start}
     index={props.index}
     endParagraph={props.endParagraph}
+    start={props.start}
+    end={props.end}
   />);
 }
 
