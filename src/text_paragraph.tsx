@@ -137,12 +137,26 @@ export default function TextParagraph(props) {
     return (<></>)
   }
 
+  function SubTime(props) {
+    const localClassName = (props.value == 0) ? 'unassigned' : props.className;
+    const className = `sub ${localClassName}`;
+    return (
+      <sub className={className}>{props.value}</sub>
+    );
+  }
+
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
-      <sub className="sub start">{props.start}</sub>
+      <SubTime
+        className="start"
+        value={props.start}
+      />
       <span ref={spanRef} style={{ fontSize: 26, display: 'inline', }} onClick={onClick}>{wordsInSpans}</span>
-      <sub className="sub end">{props.end}</sub>
+      <SubTime
+        className="end"
+        value={props.end}
+      />
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >
   </>);
