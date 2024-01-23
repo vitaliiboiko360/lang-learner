@@ -138,7 +138,7 @@ export default function TextParagraph(props) {
   }
 
   function SubTime(props) {
-    const localClassName = (props.value == 0) ? 'unassigned' : props.className;
+    const localClassName = (props.value == 0 && props.force != true) ? 'unassigned' : props.className;
     const className = `sub ${localClassName}`;
     return (
       <sub className={className}>{props.value}</sub>
@@ -149,6 +149,7 @@ export default function TextParagraph(props) {
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
       <SubTime
+        force={props.index == 0 ? true : false}
         className="start"
         value={props.start}
       />
