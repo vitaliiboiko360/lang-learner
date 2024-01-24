@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from './store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from './store/activeIndexSlice.ts';
-import SubStartEndTime from './text_page/SubStartEndTime.tsx'
+import SubStartEndTime, { SubStartEndTimeEditableField } from './text_page/SubStartEndTime.tsx'
 import ConditionalLineBreak from './text_page/ConditionalLineBreak.tsx'
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
@@ -141,7 +141,7 @@ export default function TextParagraph(props) {
         value={props.start}
       />
       <span ref={spanRef} style={{ fontSize: 26, display: 'inline', }} onClick={onClick}>{wordsInSpans}</span>
-      <SubStartEndTime
+      <SubStartEndTimeEditableField
         className="end"
         value={props.end}
       />
