@@ -3,7 +3,7 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import TextLines from './text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
-import BackHomeButton from './back_home_button.tsx';
+import BackHomeButton from './various_controls/back_home_button.tsx';
 
 import { Link } from 'react-router-dom';
 
