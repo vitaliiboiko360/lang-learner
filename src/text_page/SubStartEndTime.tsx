@@ -16,16 +16,14 @@ export function SubStartEndTimeEditableField(props) {
   React.useEffect(() => {
 
     subRef.current.addEventListener("input", (event) => {
-      console.log(event);
-      const fieldLenghtLimit = 3;
-      const fieldDataLength = subRef.current.innerText.length;
-      if (fieldDataLength >= fieldLenghtLimit) {
-        console.log(`fieldDataLength ${fieldDataLength}`);
-        event.stopPropagation();
-        return;
-      }
-      subRef.current.innerText = subRef.current.innerText + event.data; //.slice(Math.max(0, fieldLenghtLimit - fieldDataLength));
       event.stopPropagation();
+      //console.log(event);
+      const fieldLenghtLimit = 4;
+      const fieldDataLength = subRef.current.innerText.length;
+      //console.log(`subRef.current.innerText ${subRef.current.innerText}`);
+      if (fieldDataLength >= fieldLenghtLimit) {
+        subRef.current.innerText = subRef.current.innerText.slice(0, fieldLenghtLimit);
+      }
     });
     // var limit = 3;
     // subRef.current.keypress(function () {
