@@ -9,42 +9,27 @@ const SubStartEndTime = forwardRef((props, ref) => {
   );
 });
 
+const SubStartEndTimeInputField = forwardRef((props, ref) => {
+  const localClassName = (props.value == 0 && props.force != true) ? 'unassigned' : props.className;
+  const className = `sub ${localClassName}`;
+  return (
+    <input className={className} value={props.value} ></input>
+  );
+});
+
 export function SubStartEndTimeEditableField(props) {
 
   const subRef = React.useRef(null);
+  const [activeEditMode, setActiveEditMode] = React.useState(false);
 
   React.useEffect(() => {
-
-    subRef.current.addEventListener("input", (event) => {
-      event.stopPropagation();
-      //console.log(event);
-      const fieldLenghtLimit = 4;
-      const fieldDataLength = subRef.current.innerText.length;
-      //console.log(`subRef.current.innerText ${subRef.current.innerText}`);
-      if (fieldDataLength >= fieldLenghtLimit) {
-        subRef.current.innerText = subRef.current.innerText.slice(0, fieldLenghtLimit);
-      }
+    subRef.current.addEventListener("click", (event) => {
+      setActiveEditMode(!activeEditMode);
     });
-    // var limit = 3;
-    // subRef.current.keypress(function () {
-    //   return this.innerHTML.length < limit;
-    // }).on({
-    //   'paste': function (e) {
-    //     var len = this.innerHTML.length,
-    //       cp = e.originalEvent.clipboardData.getData('text');
-    //     if (len < limit)
-    //       this.innerHTML += cp.substring(0, limit - len);
-    //     return false;
-    //   },
-    //   'drop': function (e) {
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //   }
-    // });
   }, []);
 
   return (
-    <SubStartEndTime ref={subRef} {...props} />
+    activeEditMode ? <SubStartEndTimeInputField {...props} /> : <SubStartEndTime ref={subRef} {...props} />
   );
 }
 
