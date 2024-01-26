@@ -19,6 +19,7 @@ export default function AudioTextLines() {
 
   const audioRef = React.useRef(null);
   const onTimeUpdateHandler = React.useRef(null);
+  const [totalTime, setTotalTime] = React.useState(0);
 
   const updateStopTimeAudio = function (endTime) {
 
@@ -52,8 +53,14 @@ export default function AudioTextLines() {
         <Link style={{ textDecoration: 'none', marginBottom: '30px', color: 'inherit' }} to="/"><BackHomeButton /></Link>
         <PlaybackRateDropdown ref={audioRef} />
         <TextLines
-          onClick={onClickUserPlayNewStart} />
-        <AudioAndSlider ref={audioRef} audio={data.audio} />
+          onClick={onClickUserPlayNewStart}
+          totalTime={totalTime}
+        />
+        <AudioAndSlider
+          ref={audioRef}
+          audio={data.audio}
+          updateTotalTime={(t) => { setTotalTime(t) }}
+        />
       </Container>
     </>
   );

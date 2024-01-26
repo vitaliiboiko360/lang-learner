@@ -144,6 +144,7 @@ export default function TextParagraph(props) {
       <SubStartEndTimeEditableField
         className="end"
         value={props.end}
+        totalTime={props.totalTime}
       />
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >

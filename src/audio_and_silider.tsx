@@ -41,6 +41,12 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
     };
   }, []);
 
+  React.useEffect(() => {
+    if (totalTime > 0) {
+      props.updateTotalTime(totalTime);
+    }
+  });
+
   return (<>
     <Audio ref={audioRef} {...props} />
     <PlayPauseButton

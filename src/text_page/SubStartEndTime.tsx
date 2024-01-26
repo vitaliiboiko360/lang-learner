@@ -10,10 +10,20 @@ const SubStartEndTime = forwardRef((props, ref) => {
 });
 
 const SubStartEndTimeInputField = forwardRef((props, ref) => {
-  const localClassName = (props.value == 0 && props.force != true) ? 'unassigned' : props.className;
-  const className = `sub ${localClassName}`;
+  const className = (props.value == 0 && props.force != true) ? 'unassigned' : props.className;
+  const [value, setValue] = React.useState(props.value);
+  console.log(`we recived props.totalTime ${props.totalTime}`);
   return (
-    <input className={className} value={props.value} ></input>
+    <input
+      className={className}
+      type='number'
+      maxLength={5} minLength={1}
+      inputMode='numeric'
+      min={0}
+      max={props.totalTime}
+      value={value}
+      onChange={(e) => { setValue(e.target.value) }}
+    ></input>
   );
 });
 
