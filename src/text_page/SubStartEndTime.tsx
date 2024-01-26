@@ -23,7 +23,10 @@ const SubStartEndTimeInputField = forwardRef((props, ref) => {
       max={props.totalTime}
       value={value}
       onChange={(e) => { setValue(e.target.value) }}
-    ></input>
+      step={0.01}
+    // pattern='[0-9]{1,2}\.[0-9]{1,2}'
+    // required
+    ></input >
   );
 });
 
