@@ -48,7 +48,7 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
   });
 
   return (<>
-    <Audio ref={audioRef} {...props} />
+    <Audio ref={audioRef} audio={props.audio} />
     <PlayPauseButton
       ref={audioRef}
     />

@@ -59,7 +59,7 @@ export default function AudioTextLines() {
         <AudioAndSlider
           ref={audioRef}
           audio={data.audio}
-          updateTotalTime={(t) => { setTotalTime(t) }}
+          updateTotalTime={setTotalTime}
         />
       </Container>
     </>
