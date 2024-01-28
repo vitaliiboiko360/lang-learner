@@ -33,8 +33,8 @@ function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGE
 };
 
 export default function TextParagraph(props) {
-  const spanRef = React.useRef(null);
-  const svgRef = React.useRef(null);
+  const spanRef = React.useRef<HTMLSpanElement>(null);
+  const svgRef = React.useRef<HTMLAudioElement>(null);
 
   const dispatch = useAppDispatch();
   const selector = useAppSelector(selectActiveIndex);
