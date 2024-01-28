@@ -235,3 +235,7 @@
 .btn-change-speed.opened .btn-change-speed--container{
   overflow: visible;
 }
+
+.text-line {
+  font-size: 1.6rem;
+}

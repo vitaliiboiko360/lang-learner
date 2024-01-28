@@ -5,6 +5,8 @@ import { selectActiveIndex, setActiveIndexAction } from './store/activeIndexSlic
 import SubStartEndTime, { SubStartEndTimeEditableField } from './text_page/SubStartEndTime.tsx'
 import ConditionalLineBreak from './text_page/ConditionalLineBreak.tsx'
 
+import { TEXT_LINE_CLASS_NAME } from './etc/constants.ts';
+
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
 function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {
   const schema = 'http://www.w3.org/2000/svg';
@@ -129,7 +131,7 @@ export default function TextParagraph(props) {
 
   const wordsArray = props.text.split(' ');
   const wordsInSpans = wordsArray.map((w, index) => {
-    return <span key={index + 1}>{w + ' '}</span>;
+    return <span className={TEXT_LINE_CLASS_NAME} key={index + 1}>{w + ' '}</span>;
   });
 
   return (<>
