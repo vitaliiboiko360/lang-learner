@@ -5,6 +5,8 @@ import HomeEntry from './home_entry';
 
 import { makeUrlToResource } from '../etc/util.ts';
 import css from './home.module.scss';
+import HomeArticles from './home_articles.tsx';
+
 
 export default function Home() {
   //var host = document.location.host;
@@ -16,16 +18,6 @@ export default function Home() {
   if (isLoading) return 'Loading...';
   if (error) return 'Error getting list of texts: ' + error.message;
 
-  const articles = data.texts.map((element, index) => {
-    const url = makeUrlToResource(element.resource);
-    return (<React.Fragment key={index}>
-      <HomeEntry
-        title={element.title}
-        href={url}
-        artwork={element.artwork} />
-    </React.Fragment>)
-  });
-
   return (
     <div className={css.page}>
       <div className={css.container}>
@@ -34,7 +26,7 @@ export default function Home() {
       <div className={css.content}>
         <div className={css.container}>
           <div className={css.list}>
-            {articles}
+            <HomeArticles data={data}/>
           </div>
         </div>
       </div>
