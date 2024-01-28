@@ -135,7 +135,7 @@ export default function TextParagraph(props) {
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
-      <SubStartEndTime
+      <SubStartEndTimeEditableField
         force={props.index == 0 ? true : false}
         className="start"
         value={props.start}
