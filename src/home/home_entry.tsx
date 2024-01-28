@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeUrlToArtwork } from './util.ts'
+import { makeUrlToArtwork } from '../etc/util.ts'
 
 export default function HomeEntry(props) {
   return (<>

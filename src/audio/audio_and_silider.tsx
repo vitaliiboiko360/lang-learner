@@ -2,9 +2,9 @@ import React from 'react';
 
 import SliderAudioPlayseek from './slider_audio_playseek.tsx';
 import Audio from './audio.tsx';
-import PlayPauseButton from './various_controls/play_pause_button.tsx'
+import PlayPauseButton from '../various_controls/play_pause_button.tsx'
 
-import { toFixed } from './util.ts'
+import { toFixed } from '../etc/util.ts'
 
 const AudioAndSlider = React.forwardRef((props, audioRef) => {
   const [totalTime, setTotalTime] = React.useState(0);
@@ -28,6 +28,9 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
   React.useEffect(() => {
 
     const onTimeUpdateHandler = () => {
+      if (!audioRef.current) {
+        return;
+      }
       const currentTime = audioRef.current.currentTime;
       setCurrentTime(toFixed(currentTime, 2));
     }

@@ -1,0 +1,30 @@
+@import "../mixins";
+
+.center {
+  text-align: center;
+}
+
+.title {
+  @include title;
+  text-align: center;
+}
+.sub {
+  font-size: 1em;
+  padding-left: 3px;
+  padding-right: 4px px;
+  margin-left: 2px;
+  margin-right: 2px;
+  &.start {
+    background-color: rgb(1, 244, 207);
+  }
+  &.end {
+    background-color: coral;
+  }
+  & .sub.unassigned {
+    background-color: rgb(188, 183, 181);
+  }
+}
+
+.textLine {
+  font-size: 1.6rem;
+}

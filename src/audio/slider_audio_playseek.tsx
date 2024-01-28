@@ -3,6 +3,7 @@ import React from 'react';
 import Slider from '@mui/material/Slider';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import css from './audio.module.scss';
 
 const SliderAudioPlayseek = React.forwardRef((props, ref) => {
 
@@ -52,7 +53,7 @@ const SliderAudioPlayseek = React.forwardRef((props, ref) => {
           },
         }}
       />
-      <div className='flex flex-between'>
+      <div className={css.nums}>
         <TinyText>{props.currentTime}</TinyText>
         <TinyText>{props.totalTime}</TinyText>
       </div>
