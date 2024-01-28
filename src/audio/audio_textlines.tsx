@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Container from '@mui/material/Container';
 import TextLines from '../text_page/text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
 import BackHomeButton from '../various_controls/back_home_button.tsx';
@@ -23,7 +22,6 @@ export default function AudioTextLines() {
   const updateStopTimeAudio = function (endTime) {
 
     if (onTimeUpdateHandler.current) {
-      console.log('ref onTimeUpdateHandler is not null');
       audioRef.current.removeEventListener("timeupdate", onTimeUpdateHandler.current, false);
     }
 

@@ -8,7 +8,7 @@ import ConditionalLineBreak from './conditional_line_break.tsx'
 import css from './text_page.module.scss';
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
-function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {
+function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to) {
   const schema = 'http://www.w3.org/2000/svg';
   const element: SVGElement = document.createElementNS(schema, elementType);
   Object.entries(attributes).map(a => element.setAttribute(a[0], a[1] as string));
@@ -18,7 +18,6 @@ function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGE
   }
 
   const animation = document.createElementNS(schema, "animate");
-  animation.setAttribute('id', animationId);
   animation.setAttribute('attributeName', 'width');
   animation.setAttribute('from', 0);
   animation.setAttribute('to', to);
@@ -33,8 +32,8 @@ function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGE
 };
 
 export default function TextParagraph(props) {
-  const spanRef = React.useRef(null);
-  const svgRef = React.useRef(null);
+  const spanRef = React.useRef<HTMLSpanElement>(null);
+  const svgRef = React.useRef<HTMLAudioElement>(null);
 
   const dispatch = useAppDispatch();
   const selector = useAppSelector(selectActiveIndex);
@@ -120,18 +119,16 @@ export default function TextParagraph(props) {
 
   React.useEffect(() => {
     if (selector == props.index) {
-      console.log(`ACTIVE COMP paragraph index=${props.index}`);
       return;
     }
     if (svgRef.current.childNodes.length != 0) {
-      console.log(`we found childs in props.index=${props.index} element cleanup`);
       cleanupSvgChildren(svgRef);
     }
   });
 
   const wordsArray = props.text.split(' ');
   const wordsInSpans = wordsArray.map((w, index) => {
-    return <span className={css.textLine} key={index + 1}>{w + ' '}</span>;
+    return <span key={index + 1}>{w + ' '}</span>;
   });
 
   return (<>
@@ -144,8 +141,18 @@ export default function TextParagraph(props) {
       />
       {
         props.index === 0 
-        ? <h2 ref={spanRef} className={css.title} onClick={onClick}>{wordsInSpans}</h2> 
-        : <span ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
+        ? <h2 
+            ref={spanRef} 
+            className={css.title}
+            onClick={onClick}
+            >
+              {wordsInSpans}</h2> 
+        : <span 
+            ref={spanRef} 
+            className={css.textLine}  
+            onClick={onClick}
+            >
+              {wordsInSpans}</span>
       }
       <SubStartEndTimeEditableField
         classNameKey={'end'}
