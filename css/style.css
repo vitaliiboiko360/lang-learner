@@ -1,4 +1,4 @@
-/* –î–ï–§–ê–£–õ–¢–ò */
+/* ƒ≈‘¿”À“» */
 .container {
   padding: 0 1rem;
   max-width: 1200px;
@@ -28,14 +28,16 @@
   margin-bottom: 1.5rem;
   font-weight: 500;
   line-height: 2.5rem;
+  display: inline-block;
+  margin-top: inline-block;
 }
 .title::first-letter{
   color: var(--darkBlue);
   font-size: 2.5rem;
 }
-/* –î–ï–§–ê–£–õ–¢–ò */
+/* ƒ≈‘¿”À“» */
 
-/* –ö–ù–û–ü–ö–ò */
+/*  ÕŒœ » */
 .btn{
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -153,10 +155,10 @@
 .btn-change-speed.opened .btn-change-speed--container{
   overflow: visible;
 }
-/* –ö–ù–û–ü–ö–ò */
+/*  ÕŒœ » */
 
 
-/* –°–£–ë–ò */
+/* —”¡» */
 .sub {
   font-size: 1em;
   padding-left: 3px;
@@ -176,13 +178,17 @@
 .sub.unassigned {
   background-color: rgb(188, 183, 181);
 }
-/* –°–£–ë–ò */
+/* —”¡» */
 
-/* –ì–û–õ–û–í–ù–ê */
+/* √ŒÀŒ¬Õ¿ */
 .home-texts-list{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 .home-texts-list-item img{
   max-width: 100%;
+}
+
+.text-line {
+  font-size: 1.6rem;
 }

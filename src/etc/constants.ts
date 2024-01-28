@@ -1,0 +1,1 @@
+export const TEXT_LINE_CLASS_NAME = 'text-line'
