@@ -5,7 +5,7 @@ import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSli
 import SubStartEndTime, { SubStartEndTimeEditableField } from './sub_start_end_time.tsx'
 import ConditionalLineBreak from './conditional_line_break.tsx'
 
-import { TEXT_LINE_CLASS_NAME } from '../etc/constants.ts';
+import css from './text_page.module.scss';
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
 function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {
@@ -131,7 +131,7 @@ export default function TextParagraph(props) {
 
   const wordsArray = props.text.split(' ');
   const wordsInSpans = wordsArray.map((w, index) => {
-    return <span className={TEXT_LINE_CLASS_NAME} key={index + 1}>{w + ' '}</span>;
+    return <span className={css.textLine} key={index + 1}>{w + ' '}</span>;
   });
 
   return (<>
@@ -139,16 +139,16 @@ export default function TextParagraph(props) {
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
       <SubStartEndTimeEditableField
         force={props.index == 0 ? true : false}
-        className="start"
+        classNameKey={'start'}
         value={props.start}
       />
       {
         props.index === 0 
-        ? <h2 ref={spanRef} className={ 'title'} onClick={onClick}>{wordsInSpans}</h2> 
+        ? <h2 ref={spanRef} className={css.title} onClick={onClick}>{wordsInSpans}</h2> 
         : <span ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
       }
       <SubStartEndTimeEditableField
-        className="end"
+        classNameKey={'end'}
         value={props.end}
         totalTime={props.totalTime}
       />

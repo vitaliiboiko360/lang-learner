@@ -1,0 +1,76 @@
+@mixin pageTextFlex {
+  padding: 3rem 0 0.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+@mixin title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+  display: inline-block;
+  margin-top: inline-block;
+  &::first-letter {
+    color: var(--darkBlue);
+    font-size: 2.5rem;
+  }
+}
+@mixin container {
+  padding: 0 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+@mixin button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--grey);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  position: relative;
+  /* border-radius: 2px; */
+  cursor: pointer;
+  background-color: #fff;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -1px;
+    right: -1px;
+    bottom: 0;
+    z-index: 1;
+    background-color: var(--blue);
+    height: 0;
+    transition: all 0.1s linear;
+  }
+  &:hover {
+    border-top-color: var(--blue);
+
+    &::before {
+      height: 2px;
+      transition: all 0.1s linear;
+    }
+  }
+
+  &.sm {
+    padding: 0.4rem 0.4rem;
+    font-size: 0.8rem;
+  }
+  & > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: var(--blue);
+  }
+  & span + svg,
+  & svg + span {
+    margin-left: 10px;
+  }
+}

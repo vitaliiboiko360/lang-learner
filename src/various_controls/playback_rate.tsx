@@ -2,6 +2,8 @@ import React from 'react'
 import { forwardRef } from 'react';
 
 import SpeedIcon from '@mui/icons-material/Speed';
+import clsx from 'clsx';
+import css from './various_controls.module.scss'
 
 const valuesArrayLength = 3;
 const values = [1.0, 0.85, 0.7];
@@ -20,10 +22,10 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
 
   const toggleFunc = () => {
     if(!opened.current){
-      button.current.classList.add('opened');
+      button.current.classList.add(css.opened);
       opened.current = true;
     } else {
-      button.current.classList.remove('opened');
+      button.current.classList.remove(css.opened);
       opened.current = false;
     }
   }
@@ -39,9 +41,9 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
 
   
   return (
-    <button onClick={toggleFunc} className='btn btn-sm btn-change-speed' ref={button}>
+    <button onClick={toggleFunc} className={clsx(css.changeSpeed, css.sm)} ref={button}>
       <span>
-        <span  className='btn-change-speed--container'>
+        <span  className={css.changeSpeedcontainer}>
           <ul ref={ul} 
           // style={{transform: `translateY(${20 * values.findIndex((v) => v === playbackRate)})`}}
           >

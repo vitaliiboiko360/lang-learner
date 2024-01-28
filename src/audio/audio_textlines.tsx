@@ -9,6 +9,7 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import PlaybackRateDropdown from '../various_controls/playback_rate.tsx';
+import css from './audio.module.scss';
 
 export default function AudioTextLines() {
 
@@ -46,11 +47,11 @@ export default function AudioTextLines() {
   const data = useLoaderData();
 
   return (
-    <div className='container'>
+    <div className={css.container}>
       <BackHomeButton />
       <PlaybackRateDropdown ref={audioRef} />
-      <div className='page-text-flex'>
-        <div  className='page-text-content'>
+      <div className={css.page}>
+        <div  className={css.content}>
           <TextLines
           onClick={onClickUserPlayNewStart}
           totalTime={totalTime}

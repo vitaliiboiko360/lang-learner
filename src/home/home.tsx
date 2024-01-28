@@ -3,7 +3,8 @@ import React from 'react';
 import { useQuery } from 'react-query'
 import HomeEntry from './home_entry';
 
-import { makeUrlToResource } from '../etc/util.ts'
+import { makeUrlToResource } from '../etc/util.ts';
+import css from './home.module.scss';
 
 export default function Home() {
   //var host = document.location.host;
@@ -26,13 +27,13 @@ export default function Home() {
   });
 
   return (
-    <div className='page-text-flex'>
-      <div className="container">
-        <h1 className='title text-center'>Short Stories</h1>
+    <div className={css.page}>
+      <div className={css.container}>
+        <h1 className={css.title}>Short Stories</h1>
       </div>
-      <div className="page-text-content">
-        <div className="container">
-          <div className="home-texts-list">
+      <div className={css.content}>
+        <div className={css.container}>
+          <div className={css.list}>
             {articles}
           </div>
         </div>

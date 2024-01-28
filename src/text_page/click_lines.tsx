@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux'
 
 import TextParagraph from './text_paragraph.tsx'
-import store from '../store/store.ts'
+import store from '../store/store.ts';
+import css from './text_page.module.scss';
 
 function ClickableLine(props) {
   const onClick = () => {
@@ -43,7 +44,7 @@ export default function ClickLines(props) {
 
   return (<>
     <Provider store={store}>
-      <div className='text-center'>{textLines[0]}</div>
+      <div className={css.center}>{textLines[0]}</div>
       <div>{textLines.slice(1)}</div>
     </Provider>
   </>);

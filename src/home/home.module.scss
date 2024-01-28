@@ -1,0 +1,24 @@
+@import "../mixins";
+
+.page {
+  @include pageTextFlex;
+}
+
+.content {
+  flex-grow: 1;
+}
+.title {
+  @include title;
+  text-align: center;
+}
+.container {
+  @include container;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  .item img {
+    max-width: 100%;
+  }
+}
