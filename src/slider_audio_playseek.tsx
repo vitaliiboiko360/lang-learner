@@ -52,18 +52,10 @@ const SliderAudioPlayseek = React.forwardRef((props, ref) => {
           },
         }}
       />
-      <TinyText sx={{
-        marginRight: 'auto',
-        marginLeft: 0,
-        display: 'inline',
-        float: 'left'
-      }}>{props.currentTime}</TinyText>
-      <TinyText sx={{
-        marginLeft: 'auto',
-        marginRight: 0,
-        display: 'inline',
-        float: 'right'
-      }}>{props.totalTime}</TinyText>
+      <div className='flex flex-between'>
+        <TinyText>{props.currentTime}</TinyText>
+        <TinyText>{props.totalTime}</TinyText>
+      </div>
     </>);
 });
 
