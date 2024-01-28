@@ -8,7 +8,7 @@ import ConditionalLineBreak from './conditional_line_break.tsx'
 import { TEXT_LINE_CLASS_NAME } from '../etc/constants.ts';
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
-function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {
+function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to) {
   const schema = 'http://www.w3.org/2000/svg';
   const element: SVGElement = document.createElementNS(schema, elementType);
   Object.entries(attributes).map(a => element.setAttribute(a[0], a[1] as string));
@@ -18,7 +18,6 @@ function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGE
   }
 
   const animation = document.createElementNS(schema, "animate");
-  animation.setAttribute('id', animationId);
   animation.setAttribute('attributeName', 'width');
   animation.setAttribute('from', 0);
   animation.setAttribute('to', to);
