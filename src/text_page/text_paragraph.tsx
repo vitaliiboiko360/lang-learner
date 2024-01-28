@@ -1,16 +1,18 @@
 import React from 'react';
 
-import css from './text_page.module.scss'
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSlice.ts';
-import { SubStartEndTimeEditableField } from './sub_start_end_time.tsx'
+import SubStartEndTimeEditableField from './sub_start_end_time.tsx'
 import ConditionalLineBreak from './conditional_line_break.tsx'
-
 import { cleanupSvgChildren, setupAnimation } from './anime/line_animation.ts';
+import css from './text_page.module.scss'
 
 export default function TextParagraph(props) {
+  const [start, setStart] = React.useState(props.start);
+  const [end, setEnd] = React.useState(props.end);
+
   const spanRef = React.useRef<HTMLSpanElement>(null);
-  const svgRef = React.useRef<HTMLAudioElement>(null);
+  const svgRef = React.useRef<HTMLOrSVGElement>(null);
 
   const dispatch = useAppDispatch();
   const selector = useAppSelector(selectActiveIndex);
@@ -20,17 +22,18 @@ export default function TextParagraph(props) {
     if (props.index == selector) {
       cleanupSvgChildren(svgRef); // cleanup active animation
     }
-    const lenghtOfTheAnimation = props.end - props.start;
+    const lenghtOfTheAnimation = end - start;
     setupAnimation(lenghtOfTheAnimation, spanRef, svgRef);
-    props.onClick(props.start, props.end);
+    props.onClick(start, end);
   }
 
   React.useEffect(() => {
     const { width, height, top, left } = spanRef.current.getBoundingClientRect();
-    svgRef.current.style.width = `${Math.ceil(width) + 10}px`;
-    svgRef.current.style.height = `${Math.ceil(height) + 1}px`;
-    svgRef.current.style.top = Math.ceil(top) + 'px';
-    svgRef.current.style.left = Math.ceil(left) + 'px';
+    const svgElement = svgRef.current as SVGElement;
+    svgElement.style.width = `${Math.ceil(width) + 10}px`;
+    svgElement.style.height = `${Math.ceil(height) + 1}px`;
+    svgElement.style.top = Math.ceil(top) + 'px';
+    svgElement.style.left = Math.ceil(left) + 'px';
   }, []);
 
   React.useEffect(() => {
@@ -53,7 +56,8 @@ export default function TextParagraph(props) {
       <SubStartEndTimeEditableField
         force={props.index == 0 ? true : false}
         classNameKey={'start'}
-        value={props.start}
+        value={start}
+        updateValue={setStart}
       />
       {
         props.index === 0 
@@ -72,8 +76,9 @@ export default function TextParagraph(props) {
       }
       <SubStartEndTimeEditableField
         classNameKey={'end'}
-        value={props.end}
+        value={end}
         totalTime={props.totalTime}
+        updateValue={setEnd}
       />
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >

@@ -45,33 +45,27 @@ const SubStartEndTimeInputField = function (props) {
   );
 }
 
-export function SubStartEndTimeEditableField(props) {
+export default function SubStartEndTimeEditableField(props) {
   const [activeEditMode, setActiveEditMode] = React.useState(false);
-  const [value, setValue] = React.useState(props.value);
-
-  const onClick = (event) => {
-    setActiveEditMode(true);
-  };
-
   return (
     activeEditMode ?
       <SubStartEndTimeInputField
         force={props.force}
         classNameKey={props.classNameKey}
-        value={value}
         totalTime={props.totalTime}
+        value={props.value}
         updateValue={(value) => {
-          setValue(value);
+          props.updateValue(value);
           setActiveEditMode(false);
         }}
       /> :
       <SubStartEndTime
         force={props.force}
         classNameKey={props.classNameKey}
-        onClick={onClick}
-        value={value}
+        onClick={()=>{
+          setActiveEditMode(true);
+        }}
+        value={props.value}
       />
   );
 }
-
-export default SubStartEndTime;
