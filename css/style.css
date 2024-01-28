@@ -24,6 +24,8 @@
   margin-bottom: 1.5rem;
   font-weight: 500;
   line-height: 2.5rem;
+  display: inline-block;
+  margin-top: inline-block;
 }
 .title::first-letter{
   color: var(--darkBlue);
