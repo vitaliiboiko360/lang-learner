@@ -32,8 +32,13 @@ const SubStartEndTimeInputField = function (props) {
       onBlur={(e) => {
         props.updateValue(value);
       }}
-    pattern='[0-9]{1,2}\.[0-9]{1,2}'
-    required
+      onKeyDown={(event)=>{
+        if(event.key === 'Enter'){
+          props.updateValue(value);
+        }
+      }}
+      pattern='[0-9]{1,3}\.[0-9]{1,2}'
+      required
     ></input >
   );
 }
