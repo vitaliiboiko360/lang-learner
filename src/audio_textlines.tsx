@@ -46,14 +46,16 @@ export default function AudioTextLines() {
   const data = useLoaderData();
 
   return (
-    <>
-      <Container sx={{ marginTop: '30px' }}>
-        <BackHomeButton />
-        <PlaybackRateDropdown ref={audioRef} />
-        <TextLines
+    <div className='container'>
+      <BackHomeButton />
+      <PlaybackRateDropdown ref={audioRef} />
+      <div className='page-text-flex'>
+        <div  className='page-text-content'>
+          <TextLines
           onClick={onClickUserPlayNewStart}
           totalTime={totalTime}
         />
+        </div>
         <AudioAndSlider
           ref={audioRef}
           audio={data.audio}
