@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Container from '@mui/material/Container';
-import TextLines from './text_lines.tsx';
+import TextLines from '../text_page/text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
-import BackHomeButton from './various_controls/back_home_button.tsx';
+import BackHomeButton from '../various_controls/back_home_button.tsx';
 
 import {
   useLoaderData,
 } from "react-router-dom";
-import PlaybackRateDropdown from './various_controls/playback_rate.tsx';
+import PlaybackRateDropdown from '../various_controls/playback_rate.tsx';
 
 export default function AudioTextLines() {
 

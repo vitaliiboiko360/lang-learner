@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useAppDispatch, useAppSelector } from './store/hooks.ts'
-import { selectActiveIndex, setActiveIndexAction } from './store/activeIndexSlice.ts';
-import SubStartEndTime, { SubStartEndTimeEditableField } from './text_page/SubStartEndTime.tsx'
-import ConditionalLineBreak from './text_page/ConditionalLineBreak.tsx'
+import { useAppDispatch, useAppSelector } from '../store/hooks.ts'
+import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSlice.ts';
+import SubStartEndTime, { SubStartEndTimeEditableField } from './sub_start_end_time.tsx'
+import ConditionalLineBreak from './conditional_line_break.tsx'
 
-import { TEXT_LINE_CLASS_NAME } from './etc/constants.ts';
+import { TEXT_LINE_CLASS_NAME } from '../etc/constants.ts';
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
 function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {

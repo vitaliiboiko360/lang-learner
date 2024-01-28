@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from 'react-query'
 import HomeEntry from './home_entry';
 
-import { makeUrlToResource } from './util.ts'
+import { makeUrlToResource } from '../etc/util.ts'
 
 export default function Home() {
   //var host = document.location.host;

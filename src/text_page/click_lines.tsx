@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux'
 
 import TextParagraph from './text_paragraph.tsx'
-import store from './store/store.ts'
+import store from '../store/store.ts'
 
 function ClickableLine(props) {
   const onClick = () => {

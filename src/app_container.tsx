@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AudioTextLines from './audio_textlines.tsx';
-import Home from './home.tsx';
+import AudioTextLines from './audio/audio_textlines.tsx';
+import Home from './home/home.tsx';
 import ErrorPage from './error/error.tsx'
 
 import {
