@@ -49,7 +49,7 @@ export default function AudioTextLines() {
       <BackHomeButton />
       <PlaybackRateDropdown ref={audioRef} />
       <div className='page-text-flex'>
-        <div className='page-text-content'>
+        <div  className='page-text-content'>
           <TextLines onClick={onClickUserPlayNewStart} />
         </div>
         <AudioAndSlider ref={audioRef} audio={data.audio} />
