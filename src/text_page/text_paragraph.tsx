@@ -1,8 +1,9 @@
 import React from 'react';
 
+import css from './text_page.module.scss'
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSlice.ts';
-import SubStartEndTime, { SubStartEndTimeEditableField } from './sub_start_end_time.tsx'
+import { SubStartEndTimeEditableField } from './sub_start_end_time.tsx'
 import ConditionalLineBreak from './conditional_line_break.tsx'
 
 import { cleanupSvgChildren, setupAnimation } from './anime/line_animation.ts';
