@@ -3,7 +3,7 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import TextLines from './text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
-import BackHomeButton from './back_home_button.tsx';
+import BackHomeButton from './various_controls/back_home_button.tsx';
 
 import {
   useLoaderData,
@@ -17,6 +17,7 @@ export default function AudioTextLines() {
 
   const audioRef = React.useRef(null);
   const onTimeUpdateHandler = React.useRef(null);
+  const [totalTime, setTotalTime] = React.useState(0);
 
   const updateStopTimeAudio = function (endTime) {
 
@@ -45,14 +46,19 @@ export default function AudioTextLines() {
   const data = useLoaderData();
 
   return (
-    <div className='container'>
-      <BackHomeButton />
-      <PlaybackRateDropdown ref={audioRef} />
-      <div className='page-text-flex'>
-        <div  className='page-text-content'>
-          <TextLines onClick={onClickUserPlayNewStart} />
-        </div>
-        <AudioAndSlider ref={audioRef} audio={data.audio} />
+    <>
+      <Container sx={{ marginTop: '30px' }}>
+        <BackHomeButton />
+        <PlaybackRateDropdown ref={audioRef} />
+        <TextLines
+          onClick={onClickUserPlayNewStart}
+          totalTime={totalTime}
+        />
+        <AudioAndSlider
+          ref={audioRef}
+          audio={data.audio}
+          updateTotalTime={setTotalTime}
+        />
       </div>
     </div>
   );

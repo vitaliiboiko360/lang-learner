@@ -15,6 +15,9 @@ function ClickableLine(props) {
     length={props.end - props.start}
     index={props.index}
     endParagraph={props.endParagraph}
+    start={props.start}
+    end={props.end}
+    totalTime={props.totalTime}
   />);
 }
 
@@ -33,6 +36,7 @@ export default function ClickLines(props) {
         onClick={props.onClick}
         index={index}
         endParagraph={textEntry.endParagraph}
+        totalTime={props.totalTime}
       />
     </React.Fragment>);
   });

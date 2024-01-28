@@ -145,6 +145,27 @@
   flex: 270px;
   margin-bottom: 33px;
 }
+
+.sub {
+  font-size: 1em;
+  padding-left: 3px;
+  padding-right: 4px px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.sub.start {
+  background-color: rgb(1, 244, 207);
+}
+
+.sub.end {
+  background-color: coral;
+}
+
+.sub.unassigned {
+  background-color: rgb(188, 183, 181);
+}
+
 .btn-back-home{
   position: fixed;
   left: 0;

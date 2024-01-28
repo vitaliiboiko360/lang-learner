@@ -11,6 +11,7 @@ export default function TextLines(props) {
 
   return (
     <ClickLines
+      totalTime={props.totalTime}
       onClick={props.onClick}
       lines={data.lines} />);
 }

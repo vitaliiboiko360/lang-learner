@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from './store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from './store/activeIndexSlice.ts';
+import SubStartEndTime, { SubStartEndTimeEditableField } from './text_page/SubStartEndTime.tsx'
+import ConditionalLineBreak from './text_page/ConditionalLineBreak.tsx'
 
 // attributes needs to be in format {'attr':'val','attr2':'val2',...}
 function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGElement, attributes: Record<string, unknown> = {}, duration, to, animationId, beginAnimation) {
@@ -130,21 +132,24 @@ export default function TextParagraph(props) {
     return <span key={index + 1}>{w + ' '}</span>;
   });
 
-
-  function ConditionalLineBreak(props) {
-    if (props.endParagraph)
-      return (<><br /><br /></>);
-    return (<></>)
-  }
-
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
+      <SubStartEndTimeEditableField
+        force={props.index == 0 ? true : false}
+        className="start"
+        value={props.start}
+      />
       {
         props.index === 0 
         ? <h2 ref={spanRef} className={ 'title'} onClick={onClick}>{wordsInSpans}</h2> 
         : <span ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
       }
+      <SubStartEndTimeEditableField
+        className="end"
+        value={props.end}
+        totalTime={props.totalTime}
+      />
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >
   </>);
