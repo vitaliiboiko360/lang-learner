@@ -59,6 +59,7 @@
     "src/**/*"
   ],
   "exclude": [
+    "**/*.scss",
     "./dist",
     "./node_modules",
   ]

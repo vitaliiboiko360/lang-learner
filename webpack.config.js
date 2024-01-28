@@ -26,12 +26,36 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx'],
+    extensions: ['.js', '.jsx', '.tsx', '.scss'],
   },
   mode: 'development',
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.tsx$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.ts$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
       },

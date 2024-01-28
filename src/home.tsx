@@ -26,18 +26,17 @@ export default function Home() {
   });
 
   return (
-    <>
-      <div className="home-title">
-        <div className='home-center'><h3>Short Stories</h3>
-        </div>
+    <div className='page-text-flex'>
+      <div className="container">
+        <h1 className='title text-center'>Short Stories</h1>
       </div>
-      <div className="centered">
-        <div className="home-container">
-          <div className="home-entries">
+      <div className="page-text-content">
+        <div className="container">
+          <div className="home-texts-list">
             {articles}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,8 +1,12 @@
+/* ДЕФАУЛТИ */
 .container {
   padding: 0 1rem;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+}
+.text-center {
+  text-align: center;
 }
 .flex{
   display: flex;
@@ -29,6 +33,9 @@
   color: var(--darkBlue);
   font-size: 2.5rem;
 }
+/* ДЕФАУЛТИ */
+
+/* КНОПКИ */
 .btn{
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -77,93 +84,6 @@
 .btn span+svg,
 .btn svg + span {
   margin-left: 10px;
-}
-.home-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.home-center {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-}
-
-.home-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.artwork img {
-  /* border-radius: 35%; */
-  width: 280px;
-}
-
-.home-title {
-  display: grid;
-}
-
-@media only screen and (min-width: 50em) {
-  .home-container {
-    width: 1000px;
-  }
-}
-
-@media only screen and (max-width: 50em) {
-  .home-container {
-    width: 600px;
-  }
-}
-
-.centered {
-  display: grid;
-  place-items: center;
-}
-
-.home-entries {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-/* .home-entries[data-flex-wrap] {
-  flex-wrap: wrap;
-}
-
-.home-entries[data-space] {
-  justify-content: space-between;
-}
-
-.home-entries[data-align-center] {
-  align-items: center;
-} */
-
-/* Presentation styles */
-.home-entries>* {
-  max-width: 333px;
-  flex: 270px;
-  margin-bottom: 33px;
-}
-
-.sub {
-  font-size: 1em;
-  padding-left: 3px;
-  padding-right: 4px px;
-  margin-left: 2px;
-  margin-right: 2px;
-}
-
-.sub.start {
-  background-color: rgb(1, 244, 207);
-}
-
-.sub.end {
-  background-color: coral;
-}
-
-.sub.unassigned {
-  background-color: rgb(188, 183, 181);
 }
 
 .btn-back-home{
@@ -232,4 +152,37 @@
 }
 .btn-change-speed.opened .btn-change-speed--container{
   overflow: visible;
+}
+/* КНОПКИ */
+
+
+/* СУБИ */
+.sub {
+  font-size: 1em;
+  padding-left: 3px;
+  padding-right: 4px px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.sub.start {
+  background-color: rgb(1, 244, 207);
+}
+
+.sub.end {
+  background-color: coral;
+}
+
+.sub.unassigned {
+  background-color: rgb(188, 183, 181);
+}
+/* СУБИ */
+
+/* ГОЛОВНА */
+.home-texts-list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.home-texts-list-item img{
+  max-width: 100%;
 }
