@@ -20,8 +20,9 @@ export default function TextParagraph(props) {
     if (props.index == selector) {
       cleanupSvgChildren(svgRef); // cleanup active animation
     }
-    setupAnimation(props.length, spanRef, svgRef);
-    props.onClick();
+    const lenghtOfTheAnimation = props.end - props.start;
+    setupAnimation(lenghtOfTheAnimation, spanRef, svgRef);
+    props.onClick(props.start, props.end);
   }
 
   React.useEffect(() => {
