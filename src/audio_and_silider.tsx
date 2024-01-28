@@ -28,6 +28,9 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
   React.useEffect(() => {
 
     const onTimeUpdateHandler = () => {
+      if (!audioRef.current) {
+        return;
+      }
       const currentTime = audioRef.current.currentTime;
       setCurrentTime(toFixed(currentTime, 2));
     }
