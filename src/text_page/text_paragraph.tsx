@@ -119,18 +119,16 @@ export default function TextParagraph(props) {
 
   React.useEffect(() => {
     if (selector == props.index) {
-      console.log(`ACTIVE COMP paragraph index=${props.index}`);
       return;
     }
     if (svgRef.current.childNodes.length != 0) {
-      console.log(`we found childs in props.index=${props.index} element cleanup`);
       cleanupSvgChildren(svgRef);
     }
   });
 
   const wordsArray = props.text.split(' ');
   const wordsInSpans = wordsArray.map((w, index) => {
-    return <span className={TEXT_LINE_CLASS_NAME} key={index + 1}>{w + ' '}</span>;
+    return <span key={index + 1}>{w + ' '}</span>;
   });
 
   return (<>
@@ -143,8 +141,18 @@ export default function TextParagraph(props) {
       />
       {
         props.index === 0 
-        ? <h2 ref={spanRef} className={ 'title'} onClick={onClick}>{wordsInSpans}</h2> 
-        : <span ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
+        ? <h2 
+            ref={spanRef} 
+            className={ 'title'} 
+            onClick={onClick}
+            >
+              {wordsInSpans}</h2> 
+        : <span 
+            ref={spanRef} 
+            className={TEXT_LINE_CLASS_NAME}  
+            onClick={onClick}
+            >
+              {wordsInSpans}</span>
       }
       <SubStartEndTimeEditableField
         className="end"

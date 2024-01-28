@@ -1,4 +1,4 @@
-/* детюскрх */
+/* О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ */
 .container {
   padding: 0 1rem;
   max-width: 1200px;
@@ -29,15 +29,14 @@
   font-weight: 500;
   line-height: 2.5rem;
   display: inline-block;
-  margin-top: inline-block;
 }
 .title::first-letter{
   color: var(--darkBlue);
   font-size: 2.5rem;
 }
-/* детюскрх */
+/* О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ */
 
-/* ймнойх */
+/* О©╫О©╫О©╫О©╫О©╫О©╫ */
 .btn{
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -155,10 +154,10 @@
 .btn-change-speed.opened .btn-change-speed--container{
   overflow: visible;
 }
-/* ймнойх */
+/* О©╫О©╫О©╫О©╫О©╫О©╫ */
 
 
-/* ясах */
+/* О©╫О©╫О©╫О©╫ */
 .sub {
   font-size: 1em;
   padding-left: 3px;
@@ -178,9 +177,9 @@
 .sub.unassigned {
   background-color: rgb(188, 183, 181);
 }
-/* ясах */
+/* О©╫О©╫О©╫О©╫ */
 
-/* цнкнбмю */
+/* О©╫О©╫О©╫О©╫О©╫О©╫О©╫ */
 .home-texts-list{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
