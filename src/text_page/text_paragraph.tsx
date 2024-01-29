@@ -7,7 +7,7 @@ import ConditionalLineBreak from './conditional_line_break.tsx'
 import { cleanupSvgChildren, setupAnimation } from './anime/line_animation.ts';
 import css from './text_page.module.scss'
 
-export default function TextParagraph(props) {
+const TextParagraph = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
   const [end, setEnd] = React.useState(props.end);
 
@@ -58,7 +58,13 @@ export default function TextParagraph(props) {
         classNameKey={'start'}
         value={start}
         totalTime={props.totalTime}
-        updateValue={setStart}
+        updateValue={(value) => {
+          setStart(value);
+          if (timePointsRef.current) {
+            timePointsRef.current[props.index].start = parseFloat(value);
+            console.log(timePointsRef.current[props.index]);
+          }
+        }}
       />
       {
         props.index === 0
@@ -79,9 +85,17 @@ export default function TextParagraph(props) {
         classNameKey={'end'}
         value={end}
         totalTime={props.totalTime}
-        updateValue={setEnd}
+        updateValue={(value) => {
+          setEnd(value);
+          if (timePointsRef.current) {
+            timePointsRef.current[props.index].end = parseFloat(value);
+            console.log(timePointsRef.current[props.index]);
+          }
+        }}
       />
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >
   </>);
-}
+});
+
+export default TextParagraph;

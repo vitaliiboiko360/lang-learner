@@ -9,8 +9,10 @@ export default function ClickLines(props) {
   let lineArray = props.lines;
 
   let timePoints = lineArray.map((textEntry) => {
-    { start: textEntry.start; end: textEntry.end }
+    return { start: textEntry.start, end: textEntry.end }
   });
+
+  const timePointsRef = React.useRef(timePoints);
 
   let textLines = lineArray.map((textEntry, index) => {
     return (<React.Fragment key={index}>
@@ -23,6 +25,7 @@ export default function ClickLines(props) {
         end={textEntry.end}
         totalTime={props.totalTime}
         timePoints={timePoints}
+        ref={timePointsRef}
       />
     </React.Fragment>);
   });
