@@ -57,22 +57,23 @@ export default function TextParagraph(props) {
         force={props.index == 0 ? true : false}
         classNameKey={'start'}
         value={start}
+        totalTime={props.totalTime}
         updateValue={setStart}
       />
       {
-        props.index === 0 
-        ? <h2 
-            ref={spanRef} 
+        props.index === 0
+          ? <h2
+            ref={spanRef}
             className={css.title}
             onClick={onClick}
-            >
-              {wordsInSpans}</h2> 
-        : <span 
-            ref={spanRef} 
-            className={css.textLine}  
+          >
+            {wordsInSpans}</h2>
+          : <span
+            ref={spanRef}
+            className={css.textLine}
             onClick={onClick}
-            >
-              {wordsInSpans}</span>
+          >
+            {wordsInSpans}</span>
       }
       <SubStartEndTimeEditableField
         classNameKey={'end'}

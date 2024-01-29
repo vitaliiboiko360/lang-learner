@@ -27,6 +27,13 @@
   &.unassigned {
     background-color: rgb(188, 183, 181);
   }
+
+  &.invalid {
+    background-color: rgb(255, 240, 242);
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
+  }
 }
 
 .textLine {

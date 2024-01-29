@@ -7,6 +7,11 @@ import css from './text_page.module.scss';
 
 export default function ClickLines(props) {
   let lineArray = props.lines;
+
+  let timePoints = lineArray.map((textEntry) => {
+    { start: textEntry.start; end: textEntry.end }
+  });
+
   let textLines = lineArray.map((textEntry, index) => {
     return (<React.Fragment key={index}>
       <TextParagraph
@@ -17,6 +22,7 @@ export default function ClickLines(props) {
         start={textEntry.start}
         end={textEntry.end}
         totalTime={props.totalTime}
+        timePoints={timePoints}
       />
     </React.Fragment>);
   });

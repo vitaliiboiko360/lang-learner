@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx';
 import css from './text_page.module.scss';
 
-const getClassName = function (props: {value, force, classNameKey}) {
+const getClassName = function (props) {
   const localClassName = (props.value == 0 && props.force != true) ? css.unassigned : css[props.classNameKey];
   return clsx(css.sub, localClassName);
 }
@@ -10,9 +10,9 @@ const getClassName = function (props: {value, force, classNameKey}) {
 const SubStartEndTime = function (props) {
   const className = getClassName(props);
   return (
-    <sub  
-    className={className}
-    onClick={props.onClick}
+    <sub
+      className={className}
+      onClick={props.onClick}
     >{props.value}</sub>
   );
 };
@@ -34,8 +34,8 @@ const SubStartEndTimeInputField = function (props) {
       onBlur={(e) => {
         props.updateValue(value);
       }}
-      onKeyDown={(event)=>{
-        if(event.key === 'Enter'){
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') {
           props.updateValue(value);
         }
       }}
@@ -62,7 +62,7 @@ export default function SubStartEndTimeEditableField(props) {
       <SubStartEndTime
         force={props.force}
         classNameKey={props.classNameKey}
-        onClick={()=>{
+        onClick={() => {
           setActiveEditMode(true);
         }}
         value={props.value}
