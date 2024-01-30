@@ -58,10 +58,11 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
         classNameKey={'start'}
         value={start}
         totalTime={props.totalTime}
-        updateValue={(value) => {
+        updateValue={(v) => {
+          let value = parseFloat(v);
           setStart(value);
           if (timePointsRef.current) {
-            timePointsRef.current[props.index].start = parseFloat(value);
+            timePointsRef.current[props.index].start = value;
             console.log(timePointsRef.current[props.index]);
           }
         }}
@@ -85,10 +86,11 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
         classNameKey={'end'}
         value={end}
         totalTime={props.totalTime}
-        updateValue={(value) => {
+        updateValue={(v) => {
+          const value = parseFloat(v);
           setEnd(value);
           if (timePointsRef.current) {
-            timePointsRef.current[props.index].end = parseFloat(value);
+            timePointsRef.current[props.index].end = value;
             console.log(timePointsRef.current[props.index]);
           }
         }}
