@@ -63,8 +63,8 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
           setStart(value);
           if (timePointsRef.current) {
             timePointsRef.current[props.index].start = value;
-            console.log(timePointsRef.current[props.index]);
           }
+        }
         }}
       />
       {
@@ -91,7 +91,6 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
           setEnd(value);
           if (timePointsRef.current) {
             timePointsRef.current[props.index].end = value;
-            console.log(timePointsRef.current[props.index]);
           }
         }}
       />
