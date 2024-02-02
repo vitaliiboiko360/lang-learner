@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSlice.ts';
-import SubStartEndTimeEditableField from './sub_start_end_time.tsx'
+import StartEndTimeValidate from './start_end_time/start_end_time_validate.tsx'
 import ConditionalLineBreak from './conditional_line_break.tsx'
 import { cleanupSvgChildren, setupAnimation } from './anime/line_animation.ts';
 import css from './text_page.module.scss'
@@ -53,49 +53,27 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
-      <SubStartEndTimeEditableField
-        force={props.index == 0 ? true : false}
-        classNameKey={'start'}
-        value={start}
+      <StartEndTimeValidate
+        index={props.index}
+        ref={timePointsRef}
+        start={props.start}
+        end={props.end}
         totalTime={props.totalTime}
-        updateValue={(v) => {
-          let value = parseFloat(v);
-          setStart(value);
-          if (timePointsRef.current) {
-            timePointsRef.current[props.index].start = value;
-          }
+        updateStart={setStart}
+        updateEnd={setEnd}
+      >
+        {
+          props.index === 0
+            ? <h2 ref={spanRef} className={css.title} onClick={onClick}>
+              {wordsInSpans}
+            </h2>
+            : <span ref={spanRef} className={css.textLine} onClick={onClick}>
+              {wordsInSpans}
+            </span>
         }
-        }}
-      />
-      {
-        props.index === 0
-          ? <h2
-            ref={spanRef}
-            className={css.title}
-            onClick={onClick}
-          >
-            {wordsInSpans}</h2>
-          : <span
-            ref={spanRef}
-            className={css.textLine}
-            onClick={onClick}
-          >
-            {wordsInSpans}</span>
-      }
-      <SubStartEndTimeEditableField
-        classNameKey={'end'}
-        value={end}
-        totalTime={props.totalTime}
-        updateValue={(v) => {
-          const value = parseFloat(v);
-          setEnd(value);
-          if (timePointsRef.current) {
-            timePointsRef.current[props.index].end = value;
-          }
-        }}
-      />
+      </StartEndTimeValidate>
       <ConditionalLineBreak endParagraph={props.endParagraph} />
-    </div >
+    </div>
   </>);
 });
 

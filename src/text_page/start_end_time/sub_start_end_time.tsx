@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx';
-import css from './text_page.module.scss';
+import css from '../text_page.module.scss';
 
 const getClassName = function (props) {
   const localClassName = (props.value == 0 && props.force != true) ? css.unassigned : css[props.classNameKey];
