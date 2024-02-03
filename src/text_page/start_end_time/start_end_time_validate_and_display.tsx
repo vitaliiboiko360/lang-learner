@@ -41,13 +41,13 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
         const previousEnd = timePointsRef.current[index - 1].end;
         isValid_2 =
           previousEnd == 0 ||
-          value > previousEnd;
+          value >= previousEnd;
       }
     } else {
       const previousStart = timePointsRef.current[index].start;
       isValid_1 =
         previousStart == 0 ||
-        value >= previousStart;
+        value > previousStart;
 
       if ((index + 1) < timePointsRef.current.length) {
         const nextStart = timePointsRef.current[index + 1].start;
@@ -60,18 +60,23 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
     //console.log(`isValid_0 ${isValid_0}\t isValid_1 ${isValid_1}\t isValid_2  ${isValid_2}`);
     return isValid_0 && isValid_1 && isValid_2;
   }
+
+  function getValueAndValidObj(val, index, isStart: boolean) {
+    const value = parseFloat(val);
+    collectValueForValidation(value, index, isStart);
+    return { value: value, valid: isValidValue(value, index, isStart) };
+  }
+
   return (<>
     <StartEndTime_SubEditableField
       force={props.index == 0 ? true : false}
       classNameKey={'start'}
       value={start.value}
       valid={start.valid}
-      updateValue={(v) => {
-        let value = parseFloat(v);
-        collectValueForValidation(value, props.index, true);
-        let isValid = isValidValue(value, props.index, true);
-        setStart({ value: value, valid: isValid });
-        props.updateStart(value);
+      updateValue={(value) => {
+        const valueValidObj = getValueAndValidObj(value, props.index, true);
+        setStart({ value: valueValidObj.value, valid: valueValidObj.valid });
+        props.updateStart(valueValidObj.value);
       }}
     />
     {
@@ -81,12 +86,10 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
       classNameKey={'end'}
       value={end.value}
       valid={end.valid}
-      updateValue={(v) => {
-        let value = parseFloat(v);
-        collectValueForValidation(value, props.index, false);
-        let isValid = isValidValue(value, props.index, false);
-        setEnd({ value: value, valid: isValid });
-        props.updateEnd(value);
+      updateValue={(value) => {
+        const valueValidObj = getValueAndValidObj(value, props.index, false);
+        setEnd({ value: valueValidObj.value, valid: valueValidObj.valid });
+        props.updateEnd(valueValidObj.value);
       }}
     />
   </>);
