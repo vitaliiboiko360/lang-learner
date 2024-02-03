@@ -10,7 +10,7 @@ const getClassName = function (props) {
   return clsx(css.sub, localClassName);
 }
 
-const SubStartEndTime = function (props) {
+const StartEndTime_Sub = function (props) {
   const className = getClassName(props);
   return (
     <sub
@@ -20,7 +20,7 @@ const SubStartEndTime = function (props) {
   );
 };
 
-const SubStartEndTimeInputField = function (props) {
+const StartEndTime_Input = function (props) {
   const className = getClassName(props);
   const [value, setValue] = React.useState(props.value);
   return (
@@ -48,11 +48,11 @@ const SubStartEndTimeInputField = function (props) {
   );
 }
 
-export default function SubStartEndTimeEditableField(props) {
+export default function StartEndTime_SubEditableField(props) {
   const [activeEditMode, setActiveEditMode] = React.useState(false);
   return (
     activeEditMode ?
-      <SubStartEndTimeInputField
+      <StartEndTime_Input
         force={props.force}
         classNameKey={props.classNameKey}
         totalTime={props.totalTime}
@@ -63,7 +63,7 @@ export default function SubStartEndTimeEditableField(props) {
           setActiveEditMode(false);
         }}
       /> :
-      <SubStartEndTime
+      <StartEndTime_Sub
         force={props.force}
         classNameKey={props.classNameKey}
         value={props.value}

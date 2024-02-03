@@ -1,8 +1,8 @@
 import React from 'react'
 
-import SubStartEndTimeEditableField from './sub_start_end_time.tsx'
+import StartEndTime_SubEditableField from './start_end_time_sub_input.tsx'
 
-const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
+const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState({ value: props.start, valid: true });
   const [end, setEnd] = React.useState({ value: props.end, valid: true });
 
@@ -62,7 +62,7 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
     return false;
   }
   return (<>
-    <SubStartEndTimeEditableField
+    <StartEndTime_SubEditableField
       force={props.index == 0 ? true : false}
       classNameKey={'start'}
       value={start.value}
@@ -78,7 +78,7 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
     {
       props.children
     }
-    <SubStartEndTimeEditableField
+    <StartEndTime_SubEditableField
       classNameKey={'end'}
       value={end.value}
       valid={end.valid}
@@ -93,4 +93,4 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
   </>);
 });
 
-export default StartEndTimeValidate;
+export default StartEndTime_ValidateAndDisplay;

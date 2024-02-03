@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts'
 import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSlice.ts';
-import StartEndTimeValidate from './start_end_time/start_end_time_validate.tsx'
+import StartEndTime_ValidateAndDisplay from './start_end_time/start_end_time_validate_and_display.tsx'
 import ConditionalLineBreak from './conditional_line_break.tsx'
 import { cleanupSvgChildren, setupAnimation } from './anime/line_animation.ts';
 import css from './text_page.module.scss'
@@ -53,7 +53,7 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
-      <StartEndTimeValidate
+      <StartEndTime_ValidateAndDisplay
         index={props.index}
         ref={timePointsRef}
         start={props.start}
@@ -71,7 +71,7 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
               {wordsInSpans}
             </span>
         }
-      </StartEndTimeValidate>
+      </StartEndTime_ValidateAndDisplay>
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div>
   </>);
