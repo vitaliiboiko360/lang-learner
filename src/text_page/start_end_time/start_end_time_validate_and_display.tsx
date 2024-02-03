@@ -54,12 +54,11 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
         isValid_2 =
           nextStart == 0 ||
           value <= nextStart;
+        //console.log(`value ${value} <= nextStart ${nextStart}`);
       }
     }
-    if (isValid_0 && isValid_1 && isValid_2) {
-      return true;
-    }
-    return false;
+    //console.log(`isValid_0 ${isValid_0}\t isValid_1 ${isValid_1}\t isValid_2  ${isValid_2}`);
+    return isValid_0 && isValid_1 && isValid_2;
   }
   return (<>
     <StartEndTime_SubEditableField
