@@ -25,7 +25,7 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
     // we check three conditions:
     /* 1) must not overflow totalTime */
     let isValid_0
-      = value > props.totalTime;
+      = value < props.totalTime;
     /* 2) must be correct with current index */
     let isValid_1
       = true;
@@ -51,16 +51,23 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
         previousStart == 0 ||
         value >= previousStart;
 
-      if (index < timePointsRef.current.length) {
+      if ((index + 1) < timePointsRef.current.length) {
         const nextStart = timePointsRef.current[index + 1].start;
         isValid_2 =
           nextStart == 0 ||
           value <= nextStart;
       }
     }
-    return isValid_0 && isValid_1 && isValid_2;
+    console.log(`isValid_0=${isValid_0} isValid_1=${isValid_1} isValid_2=${isValid_2}`);
+    console.log(`(isValid_0 && isValid_1 && isValid_2)=${(isValid_0 && isValid_1 && isValid_2)}`);
+    if (isValid_0 && isValid_1 && isValid_2) {
+      console.log(`returned true`);
+      return true;
+    }
+    console.log(`returened false`);
+    return false;
   }
-
+  console.log(`START v:${start} valid:${startValid}\t END v:${end} valid:${endValid}`);
   return (<>
     <SubStartEndTimeEditableField
       force={props.index == 0 ? true : false}
@@ -71,7 +78,8 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
         let value = parseFloat(v);
         setStart(value);
         collectValueForValidation(value, props.index, true);
-        setStartValid(isValidValue(value, props.index, true));
+        let isValid = isValidValue(value, props.index, true);
+        setStartValid(isValid);
         console.log(`start valid ${startValid}`);
         props.updateStart(value);
       }}
@@ -87,7 +95,8 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
         let value = parseFloat(v);
         setEnd(value);
         collectValueForValidation(value, props.index, false);
-        setEndValid(isValidValue(value, props.index, false));
+        let isValid = isValidValue(value, props.index, false);
+        setEndValid(isValid);
         console.log(`end valid ${endValid}`);
         props.updateEnd(value);
       }}
