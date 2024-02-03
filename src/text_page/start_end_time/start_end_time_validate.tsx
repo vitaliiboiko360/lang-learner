@@ -23,12 +23,13 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
       return;
 
     // we check three conditions:
-    /* 1) must not overflow totalTime */ let isValid_0
+    /* 1) must not overflow totalTime */
+    let isValid_0
       = value > props.totalTime;
     /* 2) must be correct with current index */
     let isValid_1
       = true;
-    /* 3) must be corrent with adjacent index */
+    /* 3) must be correct with adjacent index */
     let isValid_2
       = true;
 
@@ -86,7 +87,7 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
         let value = parseFloat(v);
         setEnd(value);
         collectValueForValidation(value, props.index, false);
-        setStartValid(isValidValue(value, props.index, false));
+        setEndValid(isValidValue(value, props.index, false));
         console.log(`end valid ${endValid}`);
         props.updateEnd(value);
       }}
