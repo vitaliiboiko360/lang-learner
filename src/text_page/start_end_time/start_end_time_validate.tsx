@@ -56,16 +56,11 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
           value <= nextStart;
       }
     }
-    //console.log(`isValid_0=${isValid_0} isValid_1=${isValid_1} isValid_2=${isValid_2}`);
-    //console.log(`(isValid_0 && isValid_1 && isValid_2)=${(isValid_0 && isValid_1 && isValid_2)}`);
     if (isValid_0 && isValid_1 && isValid_2) {
-      //console.log(`returned true`);
       return true;
     }
-    //console.log(`returened false`);
     return false;
   }
-  //console.log(`START v:${start.value} valid:${start.valid}\t END v:${end.value} valid:${end.valid}`);
   return (<>
     <SubStartEndTimeEditableField
       force={props.index == 0 ? true : false}
@@ -77,8 +72,6 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
         collectValueForValidation(value, props.index, true);
         let isValid = isValidValue(value, props.index, true);
         setStart({ value: value, valid: isValid });
-        //console.log(`isValid ${isValid}`);
-        //console.log(`start valid ${start.valid}`);
         props.updateStart(value);
       }}
     />
@@ -94,8 +87,6 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
         collectValueForValidation(value, props.index, false);
         let isValid = isValidValue(value, props.index, false);
         setEnd({ value: value, valid: isValid });
-        //console.log(`isValid ${isValid}`);
-        //console.log(`end valid ${end.valid}`);
         props.updateEnd(value);
       }}
     />
