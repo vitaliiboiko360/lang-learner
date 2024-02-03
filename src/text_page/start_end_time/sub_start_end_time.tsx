@@ -3,7 +3,10 @@ import clsx from 'clsx';
 import css from '../text_page.module.scss';
 
 const getClassName = function (props) {
-  const localClassName = (props.value == 0 && props.force != true) ? css.unassigned : css[props.classNameKey];
+  const localClassName =
+    (props.value == 0 && props.force != true) ?
+      css.unassigned :
+      (props.valid ? css[props.classNameKey] : css.invalid);
   return clsx(css.sub, localClassName);
 }
 
@@ -54,6 +57,7 @@ export default function SubStartEndTimeEditableField(props) {
         classNameKey={props.classNameKey}
         totalTime={props.totalTime}
         value={props.value}
+        valid={props.valid}
         updateValue={(value) => {
           props.updateValue(value);
           setActiveEditMode(false);
@@ -62,10 +66,11 @@ export default function SubStartEndTimeEditableField(props) {
       <SubStartEndTime
         force={props.force}
         classNameKey={props.classNameKey}
+        value={props.value}
+        valid={props.valid}
         onClick={() => {
           setActiveEditMode(true);
         }}
-        value={props.value}
       />
   );
 }

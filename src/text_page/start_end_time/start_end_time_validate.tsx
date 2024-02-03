@@ -3,10 +3,8 @@ import React from 'react'
 import SubStartEndTimeEditableField from './sub_start_end_time.tsx'
 
 const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
-  const [start, setStart] = React.useState(props.start);
-  const [end, setEnd] = React.useState(props.end);
-  const [startValid, setStartValid] = React.useState(true);
-  const [endValid, setEndValid] = React.useState(true);
+  const [start, setStart] = React.useState({ value: props.start, valid: true });
+  const [end, setEnd] = React.useState({ value: props.end, valid: true });
 
   function collectValueForValidation(value, index, isStart: boolean) {
     if (!timePointsRef.current)
@@ -58,29 +56,29 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
           value <= nextStart;
       }
     }
-    console.log(`isValid_0=${isValid_0} isValid_1=${isValid_1} isValid_2=${isValid_2}`);
-    console.log(`(isValid_0 && isValid_1 && isValid_2)=${(isValid_0 && isValid_1 && isValid_2)}`);
+    //console.log(`isValid_0=${isValid_0} isValid_1=${isValid_1} isValid_2=${isValid_2}`);
+    //console.log(`(isValid_0 && isValid_1 && isValid_2)=${(isValid_0 && isValid_1 && isValid_2)}`);
     if (isValid_0 && isValid_1 && isValid_2) {
-      console.log(`returned true`);
+      //console.log(`returned true`);
       return true;
     }
-    console.log(`returened false`);
+    //console.log(`returened false`);
     return false;
   }
-  console.log(`START v:${start} valid:${startValid}\t END v:${end} valid:${endValid}`);
+  //console.log(`START v:${start.value} valid:${start.valid}\t END v:${end.value} valid:${end.valid}`);
   return (<>
     <SubStartEndTimeEditableField
       force={props.index == 0 ? true : false}
       classNameKey={'start'}
-      value={start}
-      valid={startValid}
+      value={start.value}
+      valid={start.valid}
       updateValue={(v) => {
         let value = parseFloat(v);
-        setStart(value);
         collectValueForValidation(value, props.index, true);
         let isValid = isValidValue(value, props.index, true);
-        setStartValid(isValid);
-        console.log(`start valid ${startValid}`);
+        setStart({ value: value, valid: isValid });
+        //console.log(`isValid ${isValid}`);
+        //console.log(`start valid ${start.valid}`);
         props.updateStart(value);
       }}
     />
@@ -89,15 +87,15 @@ const StartEndTimeValidate = React.forwardRef((props, timePointsRef) => {
     }
     <SubStartEndTimeEditableField
       classNameKey={'end'}
-      value={end}
-      valid={endValid}
+      value={end.value}
+      valid={end.valid}
       updateValue={(v) => {
         let value = parseFloat(v);
-        setEnd(value);
         collectValueForValidation(value, props.index, false);
         let isValid = isValidValue(value, props.index, false);
-        setEndValid(isValid);
-        console.log(`end valid ${endValid}`);
+        setEnd({ value: value, valid: isValid });
+        //console.log(`isValid ${isValid}`);
+        //console.log(`end valid ${end.valid}`);
         props.updateEnd(value);
       }}
     />

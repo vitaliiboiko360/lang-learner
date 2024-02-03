@@ -29,9 +29,11 @@
   }
 
   &.invalid {
+    font-size: 1.1em;
     background-color: rgb(255, 240, 242);
+    margin: 7px;
     border: none;
-    outline: 2px solid red;
+    outline: 7px solid red;
     border-radius: 5px;
   }
 }
