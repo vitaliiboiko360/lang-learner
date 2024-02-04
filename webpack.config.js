@@ -14,6 +14,7 @@ module.exports = {
     publicPath: '/js/',
     filename: 'bundle.js',
   },
+  watchOptions: { ignored: /node_modules/ },
   devServer: {
     port: PORT,
     hot: true,
