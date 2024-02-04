@@ -3,7 +3,7 @@ import React from 'react';
 import TextLines from '../text_page/text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
 import BackHomeButton from '../various_controls/back_home_button.tsx';
-import ButtonUpdate_AudioTextSyncTime from '../various_controls/button_update_audio_text_sync_time.tsx'
+import ButtonSubmit_AudioTextSyncTime from '../various_controls/button_submit_audio_text_sync_time.tsx'
 
 import {
   useLoaderData,
@@ -49,7 +49,7 @@ export default function AudioTextLines() {
     <div className={css.container}>
       <BackHomeButton />
       <PlaybackRateDropdown ref={audioRef} />
-      <ButtonUpdate_AudioTextSyncTime />
+      <ButtonSubmit_AudioTextSyncTime />
       <div className={css.page}>
         <div className={css.content}>
           <TextLines
