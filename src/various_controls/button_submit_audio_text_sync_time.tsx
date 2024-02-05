@@ -1,4 +1,5 @@
 import React from 'react';
+import css from './various_controls.module.scss'
 
 export default function ButtonSubmit_AudioTextSyncTime(props) {
   let ref = React.useRef(null);
@@ -37,7 +38,8 @@ export default function ButtonSubmit_AudioTextSyncTime(props) {
   }, []);
 
   return (
-    <button id={"ewosdjaa"} ref={ref} onClick={onClick}>
+    <button ref={ref} onClick={onClick}
+      className={css.buttonSubmitTimeSyncToServer} >
       'Submit Audio-Text Sync'
     </button>
   );
