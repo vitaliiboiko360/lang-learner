@@ -12,6 +12,11 @@ const ClickLines = React.forwardRef((props, refArrayAudioTimeTextSync) => {
     return { start: textEntry.start, end: textEntry.end }
   });
 
+  React.useEffect(() => {
+    if (!refArrayAudioTimeTextSync.current)
+      refArrayAudioTimeTextSync.current = timePoints;
+  }, []);
+
   let textLines = lineArray.map((textEntry, index) => {
     return (<React.Fragment key={index}>
       <TextParagraph
@@ -22,7 +27,6 @@ const ClickLines = React.forwardRef((props, refArrayAudioTimeTextSync) => {
         start={textEntry.start}
         end={textEntry.end}
         totalTime={props.totalTime}
-        timePoints={timePoints}
         ref={refArrayAudioTimeTextSync}
       />
     </React.Fragment>);

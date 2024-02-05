@@ -32,8 +32,7 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
     window.addEventListener('UpdateTimeArray', eventHandler);
     console.log(`event is set`);
     return () => {
-      if (ref.current)
-        ref.current.removeEventListener('UpdateTimeArray', eventHandler)
+      window.removeEventListener('UpdateTimeArray', eventHandler)
     }
   }, []);
 
