@@ -5,8 +5,13 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
   let ref = React.useRef(null);
   const onClick = () => {
     let data = {
-      data: 'testing',
+      data: 'empty',
     }
+
+    if (refArrayAudioTimeTextSync.current) {
+      data = { data: refArrayAudioTimeTextSync.current };
+    }
+
     let options = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "no-cors", // no-cors, *cors, same-origin
@@ -25,12 +30,11 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
 
   React.useEffect(() => {
     const eventHandler = (e) => {
-      console.log(`event cought ${refArrayAudioTimeTextSync.current ? refArrayAudioTimeTextSync.current : 'empty ref array'}`);
-      console.log(e.details);
+      console.log(e.detail);
     };
-    ref.current.addEventListener('UpdateTimeArray', eventHandler);
+
     window.addEventListener('UpdateTimeArray', eventHandler);
-    console.log(`event is set`);
+    console.log(`eventListener is added`);
     return () => {
       window.removeEventListener('UpdateTimeArray', eventHandler)
     }
@@ -39,7 +43,7 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
   return (
     <button ref={ref} onClick={onClick}
       className={css.buttonSubmitTimeSyncToServer} >
-      'Submit Audio-Text Sync'
+      Submit Audio-Text Sync
     </button>
   );
 });
