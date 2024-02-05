@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function ButtonSubmit_AudioTextSyncTime(props) {
-
+  let ref = React.useRef(null);
   const onClick = () => {
     let data = {
       data: 'testing',
@@ -22,8 +22,22 @@ export default function ButtonSubmit_AudioTextSyncTime(props) {
     fetch('http://192.168.1.12:4004/', options);
   };
 
+  React.useEffect(() => {
+    const eventHandler = (e) => {
+      console.log(`event cought`);
+      console.log(e.details);
+    };
+    ref.current.addEventListener('UpdateTimeArray', eventHandler);
+    window.addEventListener('UpdateTimeArray', eventHandler);
+    console.log(`event is set`);
+    return () => {
+      if (ref.current)
+        ref.current.removeEventListener('UpdateTimeArray', eventHandler)
+    }
+  }, []);
+
   return (
-    <button onClick={onClick}>
+    <button id={"ewosdjaa"} ref={ref} onClick={onClick}>
       'Submit Audio-Text Sync'
     </button>
   );

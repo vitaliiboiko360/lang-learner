@@ -9,11 +9,23 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
   function collectValueForValidation(value, index, isStart: boolean) {
     if (!timePointsRef.current)
       return;
+
+    let oldValue = 0;
     if (isStart) {
+      oldValue = timePointsRef.current[index].start;
       timePointsRef.current[index].start = value;
     } else {
+      oldValue = timePointsRef.current[index].end;
       timePointsRef.current[index].end = value;
     }
+
+    if (oldValue == value) {
+      return;
+    }
+
+    const event = new CustomEvent("UpdateTimeArray", { detail: { index: index } });
+    console.log(`dispatchEvent`);
+    window.dispatchEvent(event);
   }
 
   function isValidValue(value, index, isStart: boolean) {
