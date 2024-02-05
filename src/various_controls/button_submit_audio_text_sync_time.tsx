@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './various_controls.module.scss'
 
-export default function ButtonSubmit_AudioTextSyncTime(props) {
+const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTimeTextSync) => {
   let ref = React.useRef(null);
   const onClick = () => {
     let data = {
@@ -25,7 +25,7 @@ export default function ButtonSubmit_AudioTextSyncTime(props) {
 
   React.useEffect(() => {
     const eventHandler = (e) => {
-      console.log(`event cought`);
+      console.log(`event cought ${refArrayAudioTimeTextSync.current ? refArrayAudioTimeTextSync.current : 'empty ref array'}`);
       console.log(e.details);
     };
     ref.current.addEventListener('UpdateTimeArray', eventHandler);
@@ -43,4 +43,6 @@ export default function ButtonSubmit_AudioTextSyncTime(props) {
       'Submit Audio-Text Sync'
     </button>
   );
-}
+});
+
+export default ButtonSubmit_AudioTextSyncTime;

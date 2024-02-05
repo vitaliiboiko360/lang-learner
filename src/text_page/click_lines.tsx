@@ -5,14 +5,12 @@ import TextParagraph from './text_paragraph.tsx'
 import store from '../store/store.ts';
 import css from './text_page.module.scss';
 
-export default function ClickLines(props) {
+const ClickLines = React.forwardRef((props, refArrayAudioTimeTextSync) => {
   let lineArray = props.lines;
 
   let timePoints = lineArray.map((textEntry) => {
     return { start: textEntry.start, end: textEntry.end }
   });
-
-  const timePointsRef = React.useRef(timePoints);
 
   let textLines = lineArray.map((textEntry, index) => {
     return (<React.Fragment key={index}>
@@ -25,7 +23,7 @@ export default function ClickLines(props) {
         end={textEntry.end}
         totalTime={props.totalTime}
         timePoints={timePoints}
-        ref={timePointsRef}
+        ref={refArrayAudioTimeTextSync}
       />
     </React.Fragment>);
   });
@@ -36,4 +34,6 @@ export default function ClickLines(props) {
       <div>{textLines.slice(1)}</div>
     </Provider>
   </>);
-}
+});
+
+export default ClickLines;
