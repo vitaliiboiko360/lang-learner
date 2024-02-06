@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import css from './various_controls.module.scss'
 import { useParams } from 'react-router-dom';
 
 const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTimeTextSync) => {
+  const [isDisabled, setIsDisabled] = React.useState(true);
   const { resource } = useParams();
   let ref = React.useRef(null);
+  let setOfInvalidIndices = new Set<number>();
   const onClick = () => {
     let data = {
       resource: resource,
@@ -36,7 +38,17 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
 
   React.useEffect(() => {
     const eventHandler = (e) => {
-      console.log(e.detail);
+      e.stopPropagation();
+      // e.detail {index: number, isValid: boolean, isStart: boolean}
+      const { index, isValid, isStart } = e.detail;
+      const key = (index * 2) + isStart ? 0 : 1;
+      if (isValid)
+        setOfInvalidIndices.delete(key);
+      else
+        setOfInvalidIndices.add(key);
+
+      setIsDisabled(setOfInvalidIndices.size > 0)
+      //console.log(e.detail);
     };
 
     window.addEventListener('UpdateTimeArray', eventHandler);
@@ -47,7 +59,10 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
   }, []);
 
   return (
-    <button ref={ref} onClick={onClick}
+    <button
+      disabled={isDisabled}
+      ref={ref}
+      onClick={onClick}
       className={css.buttonSubmitTimeSyncToServer} >
       Submit Audio-Text Sync
     </button>

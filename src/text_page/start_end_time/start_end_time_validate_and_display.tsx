@@ -22,10 +22,6 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
     if (oldValue == value) {
       return;
     }
-
-    const event = new CustomEvent("UpdateTimeArray", { detail: { index: index } });
-    console.log(`dispatchEvent`);
-    window.dispatchEvent(event);
   }
 
   function isValidValue(value, index, isStart: boolean) {
@@ -73,10 +69,24 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
     return isValid_0 && isValid_1 && isValid_2;
   }
 
+  function sendEvent(index, isValid, isStart) {
+    const event = new CustomEvent("UpdateTimeArray", {
+      detail: {
+        index: index,
+        isValid: isValid,
+        isStart: isStart
+      }
+    });
+    console.log(`dispatchEvent`);
+    window.dispatchEvent(event);
+  }
+
   function getValueAndValidObj(val, index, isStart: boolean) {
     const value = parseFloat(val);
     collectValueForValidation(value, index, isStart);
-    return { value: value, valid: isValidValue(value, index, isStart) };
+    const isValid = isValidValue(value, index, isStart);
+    sendEvent(index, isValid, isStart);
+    return { value: value, valid: isValid };
   }
 
   return (<>
