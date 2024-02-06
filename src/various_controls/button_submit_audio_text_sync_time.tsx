@@ -1,15 +1,21 @@
 import React from 'react';
 import css from './various_controls.module.scss'
+import { useParams } from 'react-router-dom';
 
 const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTimeTextSync) => {
+  const { resource } = useParams();
   let ref = React.useRef(null);
   const onClick = () => {
     let data = {
+      resource: resource,
       data: 'empty',
     }
 
     if (refArrayAudioTimeTextSync.current) {
-      data = { data: refArrayAudioTimeTextSync.current };
+      data = {
+        resource: resource,
+        data: refArrayAudioTimeTextSync.current
+      };
     }
 
     let options = {
