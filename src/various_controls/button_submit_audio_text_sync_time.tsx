@@ -7,7 +7,9 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
   const { resource } = useParams();
   let ref = React.useRef(null);
   let setOfInvalidIndices = new Set<number>();
+
   const onClick = () => {
+
     let data = {
       resource: resource,
       data: 'empty',
@@ -37,6 +39,7 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
   };
 
   React.useEffect(() => {
+
     const eventHandler = (e) => {
       e.stopPropagation();
       // e.detail {index: number, isValid: boolean, isStart: boolean}
