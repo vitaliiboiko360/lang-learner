@@ -4,10 +4,10 @@ import css from './home.module.scss';
 import { makeUrlToArtwork, makeUrlToResource } from '../etc/util.ts'
 import { Link } from 'react-router-dom';
 
-export default function HomeEntry({element, num}) {
+export default function HomeEntry({ element, num }) {
   const href = makeUrlToResource(element.resource);
-  const {title,artwork } = element;
-  const row = Math.ceil(num / 3);
+  const { title, artwork } = element;
+
   return (<div className={css.item}>
     <Link to={href} className={css.link}>
       <div className={css.linkContent}>
@@ -20,7 +20,7 @@ export default function HomeEntry({element, num}) {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-          fill={'none'}
+            fill={'none'}
             id={`${num}circlePath`}
             d="
               M 10, 50
