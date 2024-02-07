@@ -27,7 +27,7 @@ const StartEndTime_Input = function (props) {
     <input
       className={className}
       type='number'
-      inputMode='numeric'
+      inputMode='decimal'
       autoFocus
       min={0}
       max={props.totalTime}
