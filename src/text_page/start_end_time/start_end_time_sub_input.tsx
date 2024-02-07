@@ -32,17 +32,24 @@ const StartEndTime_Input = function (props) {
       min={0}
       max={props.totalTime}
       value={value}
-      onChange={(e) => { setValue(parseFloat(e.target.value)) }}
+      onChange={(e) => {
+        let value = e.target.value;
+        value = value.replace(',', '.');
+        //value = parseFloat(value);
+        setValue(value);
+      }}
       step={0.01}
       onBlur={(e) => {
         props.updateValue(value);
       }}
       onKeyDown={(event) => {
+        if (event.key === ',') {
+        }
         if (event.key === 'Enter') {
           props.updateValue(value);
         }
       }}
-      pattern='[0-9]{1,3}\.[0-9]{1,2}'
+      pattern='[0-9]{1,3}[\.,][0-9]{1,2}'
       required
     ></input >
   );
