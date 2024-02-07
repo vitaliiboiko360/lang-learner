@@ -32,7 +32,7 @@ const StartEndTime_Input = function (props) {
       min={0}
       max={props.totalTime}
       value={value}
-      onChange={(e) => { setValue(e.target.value) }}
+      onChange={(e) => { setValue(parseFloat(e.target.value)) }}
       step={0.01}
       onBlur={(e) => {
         props.updateValue(value);
