@@ -3,13 +3,16 @@
 .page {
   @include pageTextFlex;
 }
+
 .content {
   flex-grow: 1;
 }
+
 .container {
   @include container;
 }
+
 .nums {
-  display: flex;
+  //display: flex;
   justify-content: space-between;
 }
