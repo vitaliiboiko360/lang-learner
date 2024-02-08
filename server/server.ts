@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+const path = require('path');
+var url = require('url');
+
 var bodyParser = require('body-parser');
 const fs = require('fs');
 
@@ -11,7 +14,51 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-const SERVER_PORT = 4004;
+const SERVER_PORT = 4001;
+
+// app.use('/css/*', express.static(path.join(__dirname, 'css')))
+// app.use('/data/*', express.static(path.join(__dirname, 'data')))
+// app.use('/js/*', express.static(path.join(__dirname, 'js')))
+
+let mimeTypes = {
+  "css": "text/css",
+  "html": "text/html",
+  "png": "image/png",
+  "json": "application/json",
+  "mp3": "audio/mpeg"
+};
+
+const getFileExtensionOrEmptyString = (filePath) => {
+  const index = path.lastIndexOf('.');
+  return (index < 0) ? '' : filePath.substr(index);
+}
+
+const getMimeType = (url) => {
+  const ext = getFileExtensionOrEmptyString(url.pathname).replace('.', '');
+  return mimeTypes[ext.toLowerCase()] || 'application/octet-stream';
+};
+
+const serveFile = (response, pathName, mime) => {
+  fs.readFile(__dirname + '/' + pathName, function (err, data) {
+    if (err) {
+      response.writeHead(500, { "Content-Type": "text/plain" });
+      return response.end('Error loading ' + pathName + " with Error: " + err);
+    }
+    response.writeHead(200, { "Content-Type": mime });
+    response.end(data);
+  });
+}
+
+app.get('/css/*', function (req, res) {
+  let options = url.parse(req.url, true);
+  let mime = getMimeType(options);
+  serveFile(res, options.pathname, mime);
+});
+
+app.get('/', function (req, res) {
+  let options = url.parse(req.url, true);
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
 
 app.post('/', function (req, res) {
   console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
@@ -54,7 +101,6 @@ app.post('/', function (req, res) {
 
     updateFile(fileName, content, data);
   });
-
 
   res.sendStatus(200);
 });
