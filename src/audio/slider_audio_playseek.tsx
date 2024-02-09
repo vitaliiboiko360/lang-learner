@@ -26,7 +26,7 @@ const SliderAudioPlayseek = React.forwardRef((props, ref) => {
         step={0.1}
         max={props.totalTime}
         valueLabelDisplay='auto'
-        onChange={(_, value) => ref.current.currentTime = value}
+        onChange={(_, value) => { }/*ref.current.currentTime = value*/}
         sx={{
           color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
           height: 4,
