@@ -38,11 +38,13 @@ const StartEndTime_Input = function (props) {
         props.updateValue(value);
       }}
       onKeyDown={(event) => {
+        if (event.key === ',') {
+        }
         if (event.key === 'Enter') {
           props.updateValue(value);
         }
       }}
-      pattern='[0-9]{1,3}\.[0-9]{1,2}'
+      pattern='[0-9]{1,3}[\.,][0-9]{1,2}'
       required
     ></input >
   );
