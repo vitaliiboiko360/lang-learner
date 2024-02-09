@@ -48,15 +48,23 @@ const serveFile = (response, pathName, mime) => {
   });
 }
 
-app.get('/*/*', function (req, res) {
+app.get(['/css/*', '/data/*', '/js/*'], function (req, res) {
+  console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
   let urlpath = req.path[req.path.length - 1] == '/' ? req.path.slice(0, req.path.length - 1) : req.path
   let mime = getMimeType(urlpath);
   serveFile(res, urlpath, mime);
 });
 
 app.get('/*', function (req, res) {
-  let urlpath = req.path[req.path.length - 1] == '/' ? req.path.slice(0, req.path.length - 1) : req.path
-  if (req.path === '/' || resourceList.texts.some(item => item.resource === urlpath)) {
+  console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
+  // const resource = req.param('resource');
+  // console.log(`${resource}`);
+  let resource = req.path.replace('/', '');
+  console.log(`we're looking for ${resource}`);
+  if (resourceList.texts.some(item => item.resource === resource)) {
+    console.log(`we found resource ${resource}`);
+  }
+  if (req.path === '/' || resourceList.texts.some(item => item.resource === resource)) {
     res.sendFile(path.join(__dirname, '/index.html'));
     return;
   }
@@ -68,9 +76,14 @@ app.get('/*', function (req, res) {
 //   res.sendFile(path.join(__dirname, '/index.html'));
 // });
 
-app.post('/', function (req, res) {
-  console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
-  console.log(`content type ${req.get('Content-Type')}`);
+app.post('/:updatedResource', function (req, res) {
+  const updatedResource = req.params['updatedResource'];
+  if (!resourceList.texts.some(item => item.resource === updatedResource)) {
+    console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
+    console.log(`content type ${req.get('Content-Type')}`);
+    res.sendStatus(403);
+    return;
+  }
 
   const data = req.body;
 
