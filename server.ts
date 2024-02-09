@@ -6,6 +6,9 @@ const url = require('node:url');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+
+const resourceList = require('./data/list_of_texts.json')
+
 app.use(express.json({
   type: ['application/json', 'text/plain']
 }))
@@ -46,15 +49,24 @@ const serveFile = (response, pathName, mime) => {
 }
 
 app.get('/*/*', function (req, res) {
-
   let urlpath = req.path[req.path.length - 1] == '/' ? req.path.slice(0, req.path.length - 1) : req.path
   let mime = getMimeType(urlpath);
   serveFile(res, urlpath, mime);
 });
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '/index.html'));
+app.get('/*', function (req, res) {
+  let urlpath = req.path[req.path.length - 1] == '/' ? req.path.slice(0, req.path.length - 1) : req.path
+  if (req.path === '/' || resourceList.texts.some(item => item.resource === urlpath)) {
+    res.sendFile(path.join(__dirname, '/index.html'));
+    return;
+  }
+  return res.sendStatus(404);
 });
+
+// app.get('/', function (req, res) {
+//   let urlpath = req.path.replace('/', '');
+//   res.sendFile(path.join(__dirname, '/index.html'));
+// });
 
 app.post('/', function (req, res) {
   console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
