@@ -5,39 +5,37 @@ import TextParagraph from './text_paragraph.tsx'
 import store from '../store/store.ts';
 import css from './text_page.module.scss';
 
-function ClickableLine(props) {
-  const onClick = () => {
-    props.onClick(props.start, props.end);
-  };
-  return (<TextParagraph
-    active={props.active}
-    onClick={onClick}
-    text={props.text}
-    length={props.end - props.start}
-    index={props.index}
-    endParagraph={props.endParagraph}
-    start={props.start}
-    end={props.end}
-    totalTime={props.totalTime}
-  />);
-}
-
-export default function ClickLines(props) {
-
-  console.log(`ClickLines rendered`);
-
+const ClickLines = React.forwardRef((props, refArrayAudioTimeTextSync) => {
   let lineArray = props.lines;
+
+  let timePoints = lineArray.map((textEntry) => {
+    return { start: textEntry.start, end: textEntry.end }
+  });
+
+  React.useEffect(() => {
+    if (!refArrayAudioTimeTextSync.current)
+      refArrayAudioTimeTextSync.current = timePoints;
+  }, []);
+
+  const getValue = (index, propsValue, isStart: boolean) => {
+    if (refArrayAudioTimeTextSync.current)
+      return isStart
+        ? refArrayAudioTimeTextSync.current.at(index).start
+        : refArrayAudioTimeTextSync.current.at(index).end;
+    return propsValue;
+  }
+
   let textLines = lineArray.map((textEntry, index) => {
     return (<React.Fragment key={index}>
-      <ClickableLine
-        active={false}
-        text={textEntry.text}
-        start={textEntry.start}
-        end={textEntry.end}
+      <TextParagraph
         onClick={props.onClick}
+        text={textEntry.text}
         index={index}
         endParagraph={textEntry.endParagraph}
+        start={getValue(props.index, textEntry.start, true)}
+        end={getValue(props.index, textEntry.end, false)}
         totalTime={props.totalTime}
+        ref={refArrayAudioTimeTextSync}
       />
     </React.Fragment>);
   });
@@ -48,4 +46,6 @@ export default function ClickLines(props) {
       <div>{textLines.slice(1)}</div>
     </Provider>
   </>);
-}
+});
+
+export default ClickLines;

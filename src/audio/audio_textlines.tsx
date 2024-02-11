@@ -3,6 +3,7 @@ import React from 'react';
 import TextLines from '../text_page/text_lines.tsx';
 import AudioAndSlider from './audio_and_silider.tsx';
 import BackHomeButton from '../various_controls/back_home_button.tsx';
+import ButtonSubmit_AudioTextSyncTime from '../various_controls/button_submit_audio_text_sync_time.tsx'
 
 import {
   useLoaderData,
@@ -17,6 +18,7 @@ export default function AudioTextLines() {
 
   const audioRef = React.useRef(null);
   const onTimeUpdateHandler = React.useRef(null);
+  const refArrayAudioTimeTextSync = React.useRef(null);
   const [totalTime, setTotalTime] = React.useState(0);
 
   const updateStopTimeAudio = function (endTime) {
@@ -37,8 +39,10 @@ export default function AudioTextLines() {
   }
 
   const onClickUserPlayNewStart = function (seconds, end) {
+    console.log(`start: ${seconds}`)
     updateStopTimeAudio(end);
-    audioRef.current.currentTime = seconds;
+
+    audioRef.current.currentTime = seconds
     audioRef.current.play();
   };
 
@@ -48,12 +52,15 @@ export default function AudioTextLines() {
     <div className={css.container}>
       <BackHomeButton />
       <PlaybackRateDropdown ref={audioRef} />
+      <ButtonSubmit_AudioTextSyncTime
+        ref={refArrayAudioTimeTextSync} />
       <div className={css.page}>
-        <div  className={css.content}>
+        <div className={css.content}>
           <TextLines
-          onClick={onClickUserPlayNewStart}
-          totalTime={totalTime}
-        />
+            onClick={onClickUserPlayNewStart}
+            totalTime={totalTime}
+            ref={refArrayAudioTimeTextSync}
+          />
         </div>
         <AudioAndSlider
           ref={audioRef}

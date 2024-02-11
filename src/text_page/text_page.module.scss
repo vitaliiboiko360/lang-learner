@@ -8,20 +8,33 @@
   @include title;
   text-align: center;
 }
+
 .sub {
   font-size: 1em;
   padding-left: 3px;
   padding-right: 4px px;
   margin-left: 2px;
   margin-right: 2px;
+
   &.start {
     background-color: rgb(1, 244, 207);
   }
+
   &.end {
     background-color: coral;
   }
-  & .sub.unassigned {
+
+  &.unassigned {
     background-color: rgb(188, 183, 181);
+  }
+
+  &.invalid {
+    font-size: 1.1em;
+    background-color: rgb(255, 240, 242);
+    margin: 7px;
+    border: none;
+    outline: 7px solid red;
+    border-radius: 5px;
   }
 }
 

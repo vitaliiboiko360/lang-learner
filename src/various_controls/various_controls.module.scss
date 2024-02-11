@@ -18,12 +18,15 @@
   padding-top: 0rem;
   padding-left: 0;
   transition: all 0.1s linear;
+
   svg {
     margin-left: 0.5rem;
   }
+
   .changeSpeedcontainer {
     height: 37px;
     overflow: hidden;
+
     li {
       text-align: center;
       justify-content: center;
@@ -32,33 +35,46 @@
       padding: 0 0.5rem;
       align-items: center;
       border: 1px solid transparent;
-      & + li {
+
+      &+li {
         border-top: none;
       }
     }
   }
+
   ul {
     transition: all 0.1s linear;
   }
+
   &.opened {
     border-left-color: transparent;
     border-top-color: var(--grey);
+
     &::before {
       height: 0;
     }
+
     ul {
       /* border: 1px solid var(--grey); */
       background-color: #fff;
       transition: all 0.1s linear;
     }
+
     li {
       border: 1px solid var(--grey);
     }
+
     .changeSpeedcontainer {
       overflow: visible;
+
       li:hover {
         background-color: var(--greyLight);
       }
     }
   }
+}
+
+.buttonSubmitTimeSyncToServer {
+  @include button;
+  position: absolute;
 }
