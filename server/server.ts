@@ -17,6 +17,13 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+app.use(function (req, res, next) {
+  //Accept-Ranges: bytes
+  res.setHeader('Accept-Ranges', 'bytes');
+  res.setHeader('Connection', 'keep-alive');
+  next();
+});
+
 const SERVER_PORT = 4001;
 
 let mimeTypes = {
@@ -34,7 +41,7 @@ const getFileExtensionOrEmptyString = (filePath) => {
 
 const getMimeType = (urlpath) => {
   const ext = getFileExtensionOrEmptyString(urlpath).replace('.', '');
-  return mimeTypes[ext.toLowerCase()] || 'application/octet-stream';
+  return mimeTypes[ext.toLowerCase()] || "application/octet-stream";
 };
 
 const serveFile = (response, pathName, mime) => {
@@ -49,25 +56,23 @@ const serveFile = (response, pathName, mime) => {
 }
 
 app.get(['/css/*', '/data/*', '/js/*'], function (req, res) {
-  console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
+  console.log(`${req.method} (css|data|js) ${req.originalUrl} ${req.ip} : ${req.protocol}`);
   let urlpath = req.path[req.path.length - 1] == '/' ? req.path.slice(0, req.path.length - 1) : req.path
   let mime = getMimeType(urlpath);
   serveFile(res, urlpath, mime);
 });
 
-app.get('/*', function (req, res) {
+app.get(['', '/:resource'], function (req, res) {
   console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
   // const resource = req.param('resource');
   // console.log(`${resource}`);
-  let resource = req.path.replace('/', '');
-  console.log(`we're looking for ${resource}`);
-  if (resourceList.texts.some(item => item.resource === resource)) {
-    console.log(`we found resource ${resource}`);
-  }
-  if (req.path === '/' || resourceList.texts.some(item => item.resource === resource)) {
+  let resource = req.params['resource'] ? req.params['resource'].replace('/', '') : '';
+  if (req.path === '' || req.path === '/' || resourceList.texts.some(item => item.resource === resource)) {
+    console.log(`we served index.html for resource: ${resource}`);
     res.sendFile(path.join(__dirname, '/index.html'));
     return;
   }
+  console.log(`we cut this request returned 404`);
   return res.sendStatus(404);
 });
 
@@ -79,8 +84,8 @@ app.get('/*', function (req, res) {
 app.post('/:updatedResource', function (req, res) {
   const updatedResource = req.params['updatedResource'];
   if (!resourceList.texts.some(item => item.resource === updatedResource)) {
-    console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol}`);
-    console.log(`content type ${req.get('Content-Type')}`);
+    console.log(`${req.method} request received from ${req.originalUrl} ${req.ip} : ${req.protocol} : ${req.get('Content-Type')}`);
+    console.log(`returned 403`);
     res.sendStatus(403);
     return;
   }
@@ -119,7 +124,6 @@ app.post('/:updatedResource', function (req, res) {
       return;
     }
     const content = fileData;
-
     updateFile(fileName, content, data);
   });
 
