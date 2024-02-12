@@ -36,6 +36,7 @@ const ButtonSubmit_AudioTextSyncTime = React.forwardRef((props, refArrayAudioTim
       body: JSON.stringify(data), // body data type must match "Content-Type" header
     };
     fetch('', options);
+    setIsDisabled(true);
   };
 
   React.useEffect(() => {

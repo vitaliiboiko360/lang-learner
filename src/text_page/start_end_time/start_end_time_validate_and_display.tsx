@@ -31,7 +31,7 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
     // we check three conditions:
     /* 1) must not overflow totalTime */
     let isValid_0
-      = value < props.totalTime;
+      = props.totalTime > 0 ? value < props.totalTime : true;
     /* 2) must be correct with current index */
     let isValid_1
       = true;
@@ -65,7 +65,7 @@ const StartEndTime_ValidateAndDisplay = React.forwardRef((props, timePointsRef) 
         //console.log(`value ${value} <= nextStart ${nextStart}`);
       }
     }
-    //console.log(`isValid_0 ${isValid_0}\t isValid_1 ${isValid_1}\t isValid_2  ${isValid_2}`);
+    // console.log(`isValid_0 ${isValid_0}\t isValid_1 ${isValid_1}\t isValid_2  ${isValid_2}`);
     return isValid_0 && isValid_1 && isValid_2;
   }
 

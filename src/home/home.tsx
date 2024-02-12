@@ -21,12 +21,12 @@ export default function Home() {
   return (
     <div className={css.page}>
       <div className={css.container}>
-        <h1 className={css.title}>Short Stories</h1>
+        <h1 className={css.title}>Spanish Stories</h1>
       </div>
       <div className={css.content}>
         <div className={css.container}>
           <div className={css.list}>
-            <HomeArticles data={data}/>
+            <HomeArticles data={data} />
           </div>
         </div>
       </div>

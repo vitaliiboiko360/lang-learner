@@ -43,6 +43,7 @@ export default function AudioTextLines() {
     updateStopTimeAudio(end);
 
     audioRef.current.currentTime = seconds
+    //console.log(`we set start to currentTime is : ${audioRef.current.currentTime}`);
     audioRef.current.play();
   };
 
