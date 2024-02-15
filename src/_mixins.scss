@@ -4,23 +4,27 @@
   display: flex;
   flex-direction: column;
 }
+
 @mixin title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   font-weight: 500;
   line-height: 2.5rem;
   display: inline-block;
+
   &::first-letter {
     color: var(--darkBlue);
     font-size: 2.5rem;
   }
 }
+
 @mixin container {
   padding: 0 1rem;
-  max-width: 1200px;
+  max-width: 80ch;
   width: 100%;
   margin: 0 auto;
 }
+
 @mixin button {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -45,6 +49,7 @@
     height: 0;
     transition: all 0.1s linear;
   }
+
   &:hover {
     border-top-color: var(--blue);
 
@@ -58,18 +63,21 @@
     padding: 0.4rem 0.4rem;
     font-size: 0.8rem;
   }
-  & > span {
+
+  &>span {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   svg {
     height: 1.5rem;
     width: 1.5rem;
     fill: var(--blue);
   }
-  & span + svg,
-  & svg + span {
+
+  & span+svg,
+  & svg+span {
     margin-left: 10px;
   }
 }
