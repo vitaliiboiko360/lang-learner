@@ -39,7 +39,7 @@ export default function AudioTextLines() {
   }
 
   const onClickUserPlayNewStart = function (seconds, end) {
-    audioRef.current.currentTime = seconds;
+    audioRef.current.currentTime = parseFloat(seconds);
     updateStopTimeAudio(end);
     audioRef.current.play();
   };
