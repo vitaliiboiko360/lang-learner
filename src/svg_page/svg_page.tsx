@@ -10,6 +10,7 @@ import { fontSize } from '@mui/system';
 
 export default function SvgPage(props) {
 
+  const svgRef = React.useRef(null);
   const data = useLoaderData();
 
   let lines = data.lines;
@@ -42,6 +43,14 @@ export default function SvgPage(props) {
       parentHeight.current = Math.max(window.innerHeight || 0);
       // console.log(`parentWidth:${parentWidth.current}<br />parentHeight:${parentHeight.current}`);
       pRef.current.innerText = `parentWidth:${parentWidth.current}\nparentHeight:${parentHeight.current}`;
+
+      if (!svgRef.current)
+        return;
+
+      var bbox = svgRef.current.getBBox();
+      // Update the width and height using the size of the contents
+      // svgRef.current.setAttribute("width", bbox.x + bbox.width + bbox.x);
+      svgRef.current.setAttribute("height", bbox.y + bbox.height + bbox.y);
     };
     window.addEventListener('resize', onResize);
     return () => {
@@ -50,11 +59,11 @@ export default function SvgPage(props) {
   }, []);
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <svg style={{
+    <div style={{ margin: '0 auto', textAlign: 'center', maxWidth: '80ch' }}>
+      <svg ref={svgRef} style={{
         border: 'blue 1px solid',
         width: '100%',
-        height: '100%'
+        height: 'auto'
       }}
         width='80ch'
         height={height}
@@ -68,6 +77,6 @@ export default function SvgPage(props) {
         {textElements}
       </svg>
       <p ref={pRef} >parentWidth:{parentWidth.current}<br />parentHeight:{parentHeight.current}</p>
-    </div >
+    </div>
   );
 }
