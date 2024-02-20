@@ -6,7 +6,7 @@ import StartEndTime_ValidateAndDisplay from './start_end_time/start_end_time_val
 import ConditionalLineBreak from './conditional_line_break.tsx'
 import css from './text_page.module.scss'
 
-const TextParagraph = React.forwardRef((props, timePointsRef) => {
+const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
   const [end, setEnd] = React.useState(props.end);
 
@@ -62,4 +62,4 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
   </>);
 });
 
-export default TextParagraph;
+export default TextAnimeLine;
