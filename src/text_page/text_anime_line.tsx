@@ -6,6 +6,20 @@ import StartEndTime_ValidateAndDisplay from './start_end_time/start_end_time_val
 import ConditionalLineBreak from './conditional_line_break.tsx'
 import css from './text_page.module.scss'
 
+
+let styleWithLine = {
+  background: 'linear-gradient(to right, rgba(100, 200, 200, 1), rgba(100, 200, 200, 1)),linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 180, 1), rgba(0, 100, 200, 1))',
+  backgroundSize: '100% 0.1em, 0 0.1em',
+  backgroundPosition: '100% 100%, 0 100%',
+  backgroundRepeat: 'no-repeat',
+  transition: 'background-size 1400ms'
+};
+
+let styleOutOfLine = {
+  backgroundSize: '0 0.1em, 100% 0.1em'
+};
+
+
 const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
   const [end, setEnd] = React.useState(props.end);
@@ -52,7 +66,7 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
             ? <h2 className={css.title} onClick={onClick}>
               {wordsInSpans}
             </h2>
-            : <span className={css.textLine} onClick={onClick}>
+            : <span style={styleWithLine} onClick={onClick}>
               {wordsInSpans}
             </span>
         }
