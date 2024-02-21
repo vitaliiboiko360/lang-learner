@@ -12,28 +12,41 @@ let styleWithLine = {
   backgroundSize: '100% 0.1em, 0 0.1em',
   backgroundPosition: '100% 100%, 0 100%',
   backgroundRepeat: 'no-repeat',
-  transition: 'background-size 1400ms'
+  transition: 'background-size 1400ms',
+  display: 'inline'
 };
 
 let styleOutOfLine = {
   backgroundSize: '0 0.1em, 100% 0.1em'
 };
 
-
 const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
   const [end, setEnd] = React.useState(props.end);
 
+  const spanRef = React.useRef(null);
+
   const dispatch = useAppDispatch();
   const selector = useAppSelector(selectActiveIndex);
 
+  const lenghtOfTheAnimation = Math.floor((end - start) * 1000);
+
+  const onTransitionEnd = (event) => {
+    spanRef.current.style.backgroundSize = '0% 1em, 0% 0.2em';
+    spanRef.current.style.transition = '';
+    console.log('ended transtion');
+  };
+
   function onClick() {
     dispatch(setActiveIndexAction(props.index));
-    if (props.index == selector) {
-      // cleanup active animation
-    }
-    const lenghtOfTheAnimation = end - start;
 
+    spanRef.current.addEventListener("transitionend", onTransitionEnd);
+    if (props.index == selector) {
+      spanRef.current.style.transition = 'none !important';
+    }
+
+    spanRef.current.style.backgroundSize = `0% 1em, 100% 0.2em`;
+    spanRef.current.style.transition = `background-size ${lenghtOfTheAnimation}ms`;
     props.onClick(start, end);
   }
 
@@ -51,7 +64,6 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
 
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
-      <svg ref={svgRef} style={{ position: 'absolute', zIndex: '-1' }}></svg>
       <StartEndTime_ValidateAndDisplay
         index={props.index}
         ref={timePointsRef}
@@ -63,12 +75,10 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
       >
         {
           props.index === 0
-            ? <h2 className={css.title} onClick={onClick}>
-              {wordsInSpans}
+            ? <h2 className={css.title}>
+              <span ref={spanRef} className={css.textAnimeLine} ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
             </h2>
-            : <span style={styleWithLine} onClick={onClick}>
-              {wordsInSpans}
-            </span>
+            : <span ref={spanRef} className={css.textAnimeLine} onClick={onClick}>{wordsInSpans}</span>
         }
       </StartEndTime_ValidateAndDisplay>
       <ConditionalLineBreak endParagraph={props.endParagraph} />

@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux'
 
 import TextParagraph from './text_paragraph.tsx'
+import TextAnimeLine from './text_anime_line.tsx'
 import store from '../store/store.ts';
 import css from './text_page.module.scss';
 
@@ -27,7 +28,7 @@ const ClickLines = React.forwardRef((props, refArrayAudioTimeTextSync) => {
 
   let textLines = lineArray.map((textEntry, index) => {
     return (<React.Fragment key={index}>
-      <TextParagraph
+      <TextAnimeLine
         onClick={props.onClick}
         text={textEntry.text}
         index={index}
