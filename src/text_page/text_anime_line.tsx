@@ -7,19 +7,6 @@ import ConditionalLineBreak from './conditional_line_break.tsx'
 import css from './text_page.module.scss'
 
 
-let styleWithLine = {
-  background: 'linear-gradient(to right, rgba(100, 200, 200, 1), rgba(100, 200, 200, 1)),linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 180, 1), rgba(0, 100, 200, 1))',
-  backgroundSize: '100% 0.1em, 0 0.1em',
-  backgroundPosition: '100% 100%, 0 100%',
-  backgroundRepeat: 'no-repeat',
-  transition: 'background-size 1400ms',
-  display: 'inline'
-};
-
-let styleOutOfLine = {
-  backgroundSize: '0 0.1em, 100% 0.1em'
-};
-
 const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
   const [end, setEnd] = React.useState(props.end);
@@ -29,24 +16,10 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector(selectActiveIndex);
 
-  const lenghtOfTheAnimation = Math.floor((end - start) * 1000);
-
-  const onTransitionEnd = (event) => {
-    spanRef.current.style.backgroundSize = '0% 1em, 0% 0.2em';
-    spanRef.current.style.transition = '';
-    console.log('ended transtion');
-  };
-
   function onClick() {
     dispatch(setActiveIndexAction(props.index));
-
-    spanRef.current.addEventListener("transitionend", onTransitionEnd);
     if (props.index == selector) {
-      spanRef.current.style.transition = 'none !important';
     }
-
-    spanRef.current.style.backgroundSize = `0% 1em, 100% 0.2em`;
-    spanRef.current.style.transition = `background-size ${lenghtOfTheAnimation}ms`;
     props.onClick(start, end);
   }
 
@@ -54,14 +27,54 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
     if (selector == props.index) {
       return;
     }
-    // clear text underline
+  });
+
+  React.useEffect(() => {
+    if (props.index != 1)
+      return;
+    if (!spanRef.current) {
+      return;
+    }
+    let children = spanRef.current.children;
+    for (let i = 0; i < children.length; i++) {
+      let element = children[i];
+      if (element.tagName != 'SPAN') {
+        // console.log(`${JSON.stringify(children[i].children[1].getBoundingClientRect())}`);
+        continue;
+      }
+
+
+      console.log(`element.innerText ${element.innerText} ${JSON.stringify(element.getBoundingClientRect())}`);
+
+
+      const { width, height } = element.getBoundingClientRect();
+      let nextSvg = children[i + 1];
+
+      const schema = 'http://www.w3.org/2000/svg';
+      const path = document.createElementNS(schema, "path");
+      path.setAttribute('d', `M0 1 l${width} 1`);
+      path.setAttribute('stroke', 'blue');
+      nextSvg.appendChild(path);
+
+
+      let oldRect = nextSvg.getBoundingClientRect();
+      nextSvg.style.left = 0;
+      nextSvg.style.top = height;
+      nextSvg.setAttribute("width", width);
+      console.log(`------${JSON.stringify(oldRect)}\n${JSON.stringify(nextSvg.getBoundingClientRect())}\n-----`);
+    }
   });
 
   const wordsArray = props.text.split(' ');
-  const wordsInSpans = wordsArray.map((w, index) => {
-    return <span key={index + 1}>{w + ' '}</span>;
+  let wordsInSpans = wordsArray.map((word, index) => {
+    let leadingSpace = index > 0 ? ' ' : '';
+    return (
+      <>
+        <span key={index + 1}>{leadingSpace + word}</span>
+        <svg key={index + wordsArray.length + 1} height='2px' width='0' style={{ position: 'absolute', zIndex: '-1' }}></svg>
+      </>
+    );
   });
-
   return (<>
     <div key={props.index} style={{ display: 'inline' }}>
       <StartEndTime_ValidateAndDisplay
@@ -74,15 +87,11 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
         updateEnd={setEnd}
       >
         {
-          props.index === 0
-            ? <h2 className={css.title}>
-              <span ref={spanRef} className={css.textAnimeLine} ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
-            </h2>
-            : <span ref={spanRef} className={css.textAnimeLine} onClick={onClick}>{wordsInSpans}</span>
+          <span key={0} style={{ position: 'relative' }} ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
         }
       </StartEndTime_ValidateAndDisplay>
       <ConditionalLineBreak endParagraph={props.endParagraph} />
-    </div>
+    </div >
   </>);
 });
 

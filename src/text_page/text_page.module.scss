@@ -52,3 +52,21 @@
   padding-bottom: 0.4em;
   // transition: background-size ease-in 1400ms;
 }
+
+.wordStack {
+  list-style: none;
+  display: inline;
+
+  li {
+    display: inline;
+    position: relative;
+  }
+}
+
+ul {
+  list-style: none;
+
+  li {
+    display: inline;
+  }
+}
