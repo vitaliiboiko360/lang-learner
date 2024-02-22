@@ -32,7 +32,7 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
 
 
   React.useEffect(() => {
-    if (props.index != 2)
+    if (props.index != 4)
       return;
     if (spanRef.current == null) {
       return;
@@ -46,9 +46,6 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
         continue;
       }
 
-
-
-
       console.log(`element.innerText ${element.innerText} ${JSON.stringify(element.getBoundingClientRect())}`);
 
 
@@ -60,16 +57,23 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
       }
 
       const schema = 'http://www.w3.org/2000/svg';
-      const path = document.createElementNS(schema, "path");
-      path.setAttribute('d', `M0 1 L${(width + 1).toFixed(0)} 1`);
-      path.setAttribute('stroke', 'blue');
-      nextSvg.appendChild(path);
+      const line = document.createElementNS(schema, "path");
+      line.setAttribute('d', `M0 1 L${Math.ceil(width)} 1`);
+      // line.setAttribute('x', '0');
+      // line.setAttribute('y', '1');
+      // line.setAttribute('x2', `${Math.ceil(width)}`);
+      // line.setAttribute('y2', '1');
+      line.setAttribute('stroke', 'blue');
+      line.setAttribute('stroke-width', '0.21em');
+      line.setAttribute('stroke-linecap', 'round');
+      line.setAttribute('stroke-linejoin', 'round');
+      nextSvg.appendChild(line);
 
 
       let oldRect = nextSvg.getBoundingClientRect();
       // nextSvg.style.left = left;
       // nextSvg.style.top = bottom;
-      nextSvg.setAttribute("width", (width + 1).toFixed(0));
+      nextSvg.setAttribute("width", Math.ceil(width));
       console.log(`------${JSON.stringify(oldRect)}\n${JSON.stringify(nextSvg.getBoundingClientRect())}\n-----`);
     }
   });
