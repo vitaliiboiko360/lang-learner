@@ -54,13 +54,10 @@
 }
 
 .wordStack {
-  list-style: none;
-  display: inline;
-
-  li {
-    display: inline;
-    position: relative;
-  }
+  // width: 100%;
+  display: inline-flex;
+  white-space: pre-wrap;
+  flex-direction: column;
 }
 
 ul {

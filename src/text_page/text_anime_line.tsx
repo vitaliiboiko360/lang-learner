@@ -23,44 +23,53 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
     props.onClick(start, end);
   }
 
-  React.useEffect(() => {
-    if (selector == props.index) {
-      return;
-    }
-  });
+  // React.useEffect(() => {
+  //   if (selector == props.index) {
+  //     return;
+  //   }
+  // });
+
+
 
   React.useEffect(() => {
-    if (props.index != 1)
+    if (props.index != 2)
       return;
-    if (!spanRef.current) {
+    if (spanRef.current == null) {
       return;
     }
+
     let children = spanRef.current.children;
     for (let i = 0; i < children.length; i++) {
-      let element = children[i];
+      let element = children[i].children[0];
       if (element.tagName != 'SPAN') {
         // console.log(`${JSON.stringify(children[i].children[1].getBoundingClientRect())}`);
         continue;
       }
 
 
+
+
       console.log(`element.innerText ${element.innerText} ${JSON.stringify(element.getBoundingClientRect())}`);
 
 
-      const { width, height } = element.getBoundingClientRect();
-      let nextSvg = children[i + 1];
+      const { width, left, bottom } = element.getBoundingClientRect();
+      let nextSvg = children[i].children[1];
+
+      while (nextSvg.firstChild) {
+        nextSvg.removeChild(nextSvg.lastChild);
+      }
 
       const schema = 'http://www.w3.org/2000/svg';
       const path = document.createElementNS(schema, "path");
-      path.setAttribute('d', `M0 1 l${width} 1`);
+      path.setAttribute('d', `M0 1 L${(width + 1).toFixed(0)} 1`);
       path.setAttribute('stroke', 'blue');
       nextSvg.appendChild(path);
 
 
       let oldRect = nextSvg.getBoundingClientRect();
-      nextSvg.style.left = 0;
-      nextSvg.style.top = height;
-      nextSvg.setAttribute("width", width);
+      // nextSvg.style.left = left;
+      // nextSvg.style.top = bottom;
+      nextSvg.setAttribute("width", (width + 1).toFixed(0));
       console.log(`------${JSON.stringify(oldRect)}\n${JSON.stringify(nextSvg.getBoundingClientRect())}\n-----`);
     }
   });
@@ -70,8 +79,10 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
     let leadingSpace = index > 0 ? ' ' : '';
     return (
       <>
-        <span key={index + 1}>{leadingSpace + word}</span>
-        <svg key={index + wordsArray.length + 1} height='2px' width='0' style={{ position: 'absolute', zIndex: '-1' }}></svg>
+        <span key={index} className={css.wordStack}>
+          <span key={index + wordsArray.length}>{leadingSpace + word}</span>
+          <svg key={index + wordsArray.length * 2} height='2px' width='0' style={{ display: 'inline', zIndex: '-1' }}></svg>
+        </span>
       </>
     );
   });
@@ -85,10 +96,11 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
         totalTime={props.totalTime}
         updateStart={setStart}
         updateEnd={setEnd}
+        key={props.index}
       >
-        {
-          <span key={0} style={{ position: 'relative' }} ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
-        }
+
+        <span key={props.index} /*style={{ position: 'relative' }}*/ ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
+
       </StartEndTime_ValidateAndDisplay>
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >
