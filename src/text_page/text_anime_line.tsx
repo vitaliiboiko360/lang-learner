@@ -24,66 +24,16 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
     dispatch(setActiveIndexAction(props.index));
     if (props.index == selector) {
       cleanupSvgChildren2(spanRef);
-      setupAnimation2(props.text.length, totalDurationOfAnimation, spanRef)
-
+      setupAnimation2(props.text.length, totalDurationOfAnimation, spanRef);
     }
     props.onClick(start, end);
   }
 
-  // React.useEffect(() => {
-  //   if (selector == props.index) {
-  //     return;
-  //   }
-  // });
-
-
-
   React.useEffect(() => {
-    if (props.index != 4)
-      return;
-    if (spanRef.current == null) {
+    if (selector == props.index) {
       return;
     }
-
-    let children = spanRef.current.children;
-    for (let i = 0; i < children.length; i++) {
-      let element = children[i].children[0];
-      if (element.tagName != 'SPAN') {
-        // console.log(`${JSON.stringify(children[i].children[1].getBoundingClientRect())}`);
-        continue;
-      }
-
-      // console.log(`element.innerText ${element.innerText} ${JSON.stringify(element.getBoundingClientRect())}`);
-
-
-      const { width, left, bottom } = element.getBoundingClientRect();
-      let nextSvg = children[i].children[1];
-
-      // while (nextSvg.firstChild) {
-      //   nextSvg.removeChild(nextSvg.lastChild);
-      // }
-
-      // const schema = 'http://www.w3.org/2000/svg';
-      // const line = document.createElementNS(schema, "path");
-      // line.setAttribute('d', `M1 1 H${Math.ceil(width)}`);
-      // // line.setAttribute('x', '0');
-      // // line.setAttribute('y', '1');
-      // // line.setAttribute('x2', `${Math.ceil(width)}`);
-      // // line.setAttribute('y2', '1');
-      // line.setAttribute('stroke', 'blue');
-      // line.setAttribute('fill', 'none');
-      // line.setAttribute('stroke-width', '0.21em');
-      // line.setAttribute("stroke-linecap", "round");
-      // line.setAttribute('stroke-linejoin', 'round');
-      // nextSvg.appendChild(line);
-
-
-      // let oldRect = nextSvg.getBoundingClientRect();
-      // nextSvg.style.left = left;
-      // nextSvg.style.top = bottom;
-      nextSvg.setAttribute("width", Math.ceil(width));
-      // console.log(`------${JSON.stringify(oldRect)}\n${JSON.stringify(nextSvg.getBoundingClientRect())}\n-----`);
-    }
+    cleanupSvgChildren2(spanRef);
   });
 
   const wordsArray = props.text.split(' ');

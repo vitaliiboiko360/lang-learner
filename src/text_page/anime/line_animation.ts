@@ -16,6 +16,7 @@ function addSVGElemenReturnAnime(elementType: string, target: HTMLElement | SVGE
   animation.setAttribute('begin', 'indefinite');
   animation.setAttribute('dur', dur);
   animation.setAttribute('repeatCount', '1');
+  animation.setAttribute('fill', 'freeze');
 
   element.appendChild(animation);
   target.appendChild(element);
@@ -91,20 +92,20 @@ export function setupAnimation2(length, totalDurationOfAnimation, spanRef) {
   let children = spanRef.current.children;
 
   let animationElements = [];
-
   for (let i = 0; i < children.length; i++) {
     let spanElement = children[i].children[0];
     let svgElement = children[i].children[1];
 
-    const width = Math.ceil(spanElement.getBoundingClientRect().width);
+    const width = spanElement.getBoundingClientRect().width;
     svgElement.setAttribute('width', width);
 
     let charLength = spanElement.innerText.length;
     let portionOfLength = (charLength * 100) / length;
     let portionOfDuration = (totalDurationOfAnimation * portionOfLength) / 100;
 
+    let path = svgElement.getElementsByTagName('path')[0];
 
-    let animation = addSVGElemenReturnAnime('rect', svgElement, {
+    let animation = path ? path.children[0] : addSVGElemenReturnAnime('rect', svgElement, {
       'x': 0, 'y': 1, 'stroke-width': '0.2em', 'stroke': 'var(--blue)', 'width': '0', 'height': '0.2em', 'rx': '0.05em', 'ry': '0.05em'
     }, `${portionOfDuration}s`, width);
 
@@ -116,18 +117,19 @@ export function setupAnimation2(length, totalDurationOfAnimation, spanRef) {
   const runAnimation = function (index) {
     animationElements[index].addEventListener("endEvent", () => {
       if ((index + 1) < animationElements.length) {
-        animationElements[index].parentNode.setAttribute('width', animationElements[index].getAttribute('to'));
+        // animationElements[index].parentNode.setAttribute('width', animationElements[index].getAttribute('to'));
         runAnimation(index + 1);
       }
       else {
-        animationElements.forEach((element) => { element.parentNode.remove() });
+        animationElements.forEach((element) => {
+          element.parentNode.remove();
+        });
       }
     });
     animationElements[index].beginElement();
   }
   runAnimation(0);
 }
-
 
 export function cleanupSvgChildren2(spanRef) {
   if (spanRef.current == null)
@@ -136,9 +138,9 @@ export function cleanupSvgChildren2(spanRef) {
   let children = spanRef.current.children;
   for (let i = 0; i < children.length; i++) {
     let svgElement = children[i].children[1];
-    while (svgElement.firstChild) {
-      svgElement.removeChild(svgElement.lastChild);
+    let pathElement = svgElement.children[0];
+    if (pathElement) {
+      pathElement.remove();
     }
-
   }
 }
