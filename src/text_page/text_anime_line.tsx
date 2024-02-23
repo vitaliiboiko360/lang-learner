@@ -6,6 +6,8 @@ import StartEndTime_ValidateAndDisplay from './start_end_time/start_end_time_val
 import ConditionalLineBreak from './conditional_line_break.tsx'
 import css from './text_page.module.scss'
 
+import { setupAnimation2, cleanupSvgChildren2 } from './anime/line_animation.ts';
+
 
 const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
@@ -13,12 +15,17 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
 
   const spanRef = React.useRef(null);
 
+  let totalDurationOfAnimation = end - start;
+
   const dispatch = useAppDispatch();
   const selector = useAppSelector(selectActiveIndex);
 
   function onClick() {
     dispatch(setActiveIndexAction(props.index));
     if (props.index == selector) {
+      cleanupSvgChildren2(spanRef);
+      setupAnimation2(props.text.length, totalDurationOfAnimation, spanRef)
+
     }
     props.onClick(start, end);
   }
@@ -46,35 +53,36 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
         continue;
       }
 
-      console.log(`element.innerText ${element.innerText} ${JSON.stringify(element.getBoundingClientRect())}`);
+      // console.log(`element.innerText ${element.innerText} ${JSON.stringify(element.getBoundingClientRect())}`);
 
 
       const { width, left, bottom } = element.getBoundingClientRect();
       let nextSvg = children[i].children[1];
 
-      while (nextSvg.firstChild) {
-        nextSvg.removeChild(nextSvg.lastChild);
-      }
+      // while (nextSvg.firstChild) {
+      //   nextSvg.removeChild(nextSvg.lastChild);
+      // }
 
-      const schema = 'http://www.w3.org/2000/svg';
-      const line = document.createElementNS(schema, "path");
-      line.setAttribute('d', `M0 1 L${Math.ceil(width)} 1`);
-      // line.setAttribute('x', '0');
-      // line.setAttribute('y', '1');
-      // line.setAttribute('x2', `${Math.ceil(width)}`);
-      // line.setAttribute('y2', '1');
-      line.setAttribute('stroke', 'blue');
-      line.setAttribute('stroke-width', '0.21em');
-      line.setAttribute('stroke-linecap', 'round');
-      line.setAttribute('stroke-linejoin', 'round');
-      nextSvg.appendChild(line);
+      // const schema = 'http://www.w3.org/2000/svg';
+      // const line = document.createElementNS(schema, "path");
+      // line.setAttribute('d', `M1 1 H${Math.ceil(width)}`);
+      // // line.setAttribute('x', '0');
+      // // line.setAttribute('y', '1');
+      // // line.setAttribute('x2', `${Math.ceil(width)}`);
+      // // line.setAttribute('y2', '1');
+      // line.setAttribute('stroke', 'blue');
+      // line.setAttribute('fill', 'none');
+      // line.setAttribute('stroke-width', '0.21em');
+      // line.setAttribute("stroke-linecap", "round");
+      // line.setAttribute('stroke-linejoin', 'round');
+      // nextSvg.appendChild(line);
 
 
-      let oldRect = nextSvg.getBoundingClientRect();
+      // let oldRect = nextSvg.getBoundingClientRect();
       // nextSvg.style.left = left;
       // nextSvg.style.top = bottom;
       nextSvg.setAttribute("width", Math.ceil(width));
-      console.log(`------${JSON.stringify(oldRect)}\n${JSON.stringify(nextSvg.getBoundingClientRect())}\n-----`);
+      // console.log(`------${JSON.stringify(oldRect)}\n${JSON.stringify(nextSvg.getBoundingClientRect())}\n-----`);
     }
   });
 
