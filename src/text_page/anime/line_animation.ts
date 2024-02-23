@@ -88,7 +88,7 @@ export function setupAnimation(length, spanRef, svgRef) {
 
 
 export function setupAnimation2(length, totalDurationOfAnimation, spanRef) {
-
+  console.log(`setupAnimation2`);
   let children = spanRef.current.children;
 
   let animationElements = [];
@@ -111,8 +111,6 @@ export function setupAnimation2(length, totalDurationOfAnimation, spanRef) {
 
     animationElements.push(animation);
   }
-
-  console.log(`animationElements ${animationElements}`)
 
   const runAnimation = function (index) {
     animationElements[index].addEventListener("endEvent", () => {

@@ -24,8 +24,8 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
     dispatch(setActiveIndexAction(props.index));
     if (props.index == selector) {
       cleanupSvgChildren2(spanRef);
-      setupAnimation2(props.text.length, totalDurationOfAnimation, spanRef);
     }
+    setupAnimation2(props.text.length, totalDurationOfAnimation, spanRef);
     props.onClick(start, end);
   }
 
