@@ -88,7 +88,6 @@ export function setupAnimation(length, spanRef, svgRef) {
 
 
 export function setupAnimation2(length, totalDurationOfAnimation, spanRef) {
-  console.log(`setupAnimation2`);
   let children = spanRef.current.children;
 
   let animationElements = [];
