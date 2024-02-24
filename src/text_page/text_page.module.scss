@@ -1,12 +1,22 @@
 @import "../mixins";
 
 .center {
+  padding-top: 1em;
   text-align: center;
 }
 
 .title {
   @include title;
   text-align: center;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.textPage {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 0.5em;
+  padding: 0 0.5em;
+  text-shadow: 0.05em 0.05em #c3c3c3;
 }
 
 .sub {

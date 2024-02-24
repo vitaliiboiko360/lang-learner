@@ -43,7 +43,7 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
       <>
         <span key={index} className={css.wordStack}>
           <span key={index + wordsArray.length}>{leadingSpace + word}</span>
-          <svg key={index + wordsArray.length * 2} height='2px' width='0' style={{ display: 'inline', zIndex: '-1' }}></svg>
+          <svg key={index + wordsArray.length * 2} height='2px' width='0'></svg>
         </span>
       </>
     );

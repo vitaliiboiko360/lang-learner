@@ -43,12 +43,14 @@ const ClickLines = React.forwardRef((props, refArrayAudioTimeTextSync) => {
 
   return (<>
     <Provider store={store}>
-      <div className={css.center}>
-        <h2 className={css.title}>
-          {textLines[0]}
-        </h2>
+      <div className={css.textPage}>
+        <div className={css.center}>
+          <h2 className={css.title}>
+            {textLines[0]}
+          </h2>
+        </div>
+        <div>{textLines.slice(1)}</div>
       </div>
-      <div>{textLines.slice(1)}</div>
     </Provider>
   </>);
 });
