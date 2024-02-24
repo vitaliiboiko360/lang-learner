@@ -46,22 +46,22 @@ export default function AudioTextLines() {
   const containerRef = React.useRef(null);
 
   React.useEffect(() => {
-    var hexValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e"];
+    let hexValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e"];
 
     function populate(a) {
-      for (var i = 0; i < 6; i++) {
-        var x = Math.round(Math.random() * 14);
-        var y = hexValues[x];
+      for (let i = 0; i < 6; i++) {
+        let x = Math.round(Math.random() * 14);
+        let y = hexValues[x];
         a += y;
       }
       return a;
     }
 
-    var newColor1 = populate('#');
-    var newColor2 = populate('#');
-    var angle = Math.round(Math.random() * 360);
+    let newColor1 = populate('#');
+    let newColor2 = populate('#');
+    let angle = Math.round(Math.random() * 360);
 
-    var gradient = `linear-gradient(${angle}deg, ${newColor1}80, ${newColor2}80)`;
+    let gradient = `linear-gradient(${angle}deg, ${newColor1}40, ${newColor2}40)`;
     document.body.style.background = gradient;
     return () => {
       document.body.style.background = '';
