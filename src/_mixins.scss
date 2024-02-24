@@ -6,20 +6,20 @@
 }
 
 @mixin title {
-  font-size: 1.8rem;
+  // font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  // font-weight: 500;
   line-height: 2.5rem;
   display: inline-block;
 
-  &::first-letter {
-    color: var(--darkBlue);
-    font-size: 2.5rem;
-  }
+  // &::first-letter {
+  //   color: var(--darkBlue);
+  //   font-size: 2.5rem;
+  // }
 }
 
 @mixin container {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   max-width: 80ch;
   width: 100%;
   margin: 0 auto;
