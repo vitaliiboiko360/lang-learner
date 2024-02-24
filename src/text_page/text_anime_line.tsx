@@ -60,9 +60,7 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
         updateEnd={setEnd}
         key={props.index}
       >
-
         <span key={props.index} /*style={{ position: 'relative' }}*/ ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
-
       </StartEndTime_ValidateAndDisplay>
       <ConditionalLineBreak endParagraph={props.endParagraph} />
     </div >
