@@ -12,7 +12,13 @@
 html {
   font-size: 16px;
 }
-
+@media (max-width: 767px) {
+  html{
+    min-width: 375px;
+    overflow: auto;
+    font-size: 14px;
+  }
+}
 body {
   font-family: 'Merriweather';
   margin: 0;
