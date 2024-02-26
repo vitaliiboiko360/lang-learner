@@ -70,10 +70,13 @@ export default function AudioTextLines() {
 
   return (
     <div className={css.container}>
+
       <BackHomeButton />
+      {/* <ButtonSubmit_AudioTextSyncTime
+        ref={refArrayAudioTimeTextSync} /> */}
       <PlaybackRateDropdown ref={audioRef} />
-      <ButtonSubmit_AudioTextSyncTime
-        ref={refArrayAudioTimeTextSync} />
+
+
       <div className={css.page}>
         <div className={css.content}>
           <TextLines

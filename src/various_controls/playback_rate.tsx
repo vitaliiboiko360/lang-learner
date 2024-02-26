@@ -5,7 +5,6 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import clsx from 'clsx';
 import css from './various_controls.module.scss'
 
-const valuesArrayLength = 3;
 const values = [1.0, 0.85, 0.7];
 
 const PlaybackRateDropdown = forwardRef((props, ref) => {
@@ -15,13 +14,12 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
 
   let playbackRate = ref.current ? ref.current.playbackRate : 1;
 
-
   React.useEffect(() => {
     playbackRate = ref.current ? ref.current.playbackRate : 1;
   }, [playbackRate]);
 
   const toggleFunc = () => {
-    if(!opened.current){
+    if (!opened.current) {
       button.current.classList.add(css.opened);
       opened.current = true;
     } else {
@@ -31,7 +29,7 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
   }
   const onClick = (e, value) => {
     e.stopPropagation();
-    if(opened.current){
+    if (opened.current) {
       if (ref.current) { ref.current.playbackRate = value; }
       const calcTranslate = 36 * values.findIndex((v) => v === value)
       ul.current.style.transform = `translateY(-${calcTranslate}px)`;
@@ -39,25 +37,21 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
     toggleFunc()
   };
 
-  
   return (
     <button onClick={toggleFunc} className={clsx(css.changeSpeed, css.sm)} ref={button}>
       <span>
-        <span  className={css.changeSpeedcontainer}>
-          <ul ref={ul} 
-          // style={{transform: `translateY(${20 * values.findIndex((v) => v === playbackRate)})`}}
-          >
+        <span className={css.changeSpeedcontainer}>
+          <ul ref={ul}>
             {values.map((value, index) => {
               return (<li
-                // style={(value != playbackRate) ? { ...styleObj, ...{ 'display': 'none' } } : styleObj}
                 onClick={(e) => onClick(e, value)}
                 data-value={value}
                 key={index}
               >{value}</li>)
             })}
           </ul>
-        </span >
-        
+        </span>
+
         <SpeedIcon>Playback Speed</SpeedIcon>
       </span>
     </button>

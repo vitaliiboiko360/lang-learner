@@ -2,17 +2,10 @@
 
 .backHome {
   @include button;
-  position: fixed;
-  left: 0;
-  bottom: 0;
 }
 
 .changeSpeed {
   @include button;
-
-  position: fixed;
-  top: 30%;
-  right: 0;
   height: 37px;
   padding-bottom: 0rem;
   padding-top: 0rem;
