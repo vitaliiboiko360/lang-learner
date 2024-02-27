@@ -6,7 +6,7 @@
 
 .changeSpeed {
   @include button;
-  height: 37px;
+  height: 35px;
   padding-bottom: 0rem;
   padding-top: 0rem;
   padding-left: 0;
@@ -17,7 +17,7 @@
   }
 
   .changeSpeedcontainer {
-    height: 37px;
+    height: 18px;
     overflow: hidden;
 
     li {
