@@ -51,6 +51,7 @@ export default function AudioTextLines() {
     let gradient = `linear-gradient(${angle}deg, ${newColor1}40, ${newColor2}40)`;
 
     document.body.style.background = gradient;
+    document.body.style.minHeight = '100vw';
     return () => {
       document.body.style.background = '';
     }
