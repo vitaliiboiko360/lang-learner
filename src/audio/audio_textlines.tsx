@@ -49,7 +49,7 @@ export default function AudioTextLines() {
     let angle = Math.round(Math.random() * 360);
 
     let gradient = `linear-gradient(${angle}deg, ${newColor1}40, ${newColor2}40)`;
-    console.log(gradient);
+
     document.body.style.background = gradient;
     return () => {
       document.body.style.background = '';
@@ -59,11 +59,12 @@ export default function AudioTextLines() {
   return (
     <div className={css.container}>
 
-      <BackHomeButton />
-      {/* <ButtonSubmit_AudioTextSyncTime
+      <div className={css.controlTopPanel}>
+        <div><BackHomeButton /></div>
+        {/* <ButtonSubmit_AudioTextSyncTime
         ref={refArrayAudioTimeTextSync} /> */}
-      <PlaybackRateDropdown ref={audioRef} />
-
+        <div><PlaybackRateDropdown ref={audioRef} /></div>
+      </div>
 
       <div className={css.page}>
         <div className={css.content}>
@@ -73,12 +74,12 @@ export default function AudioTextLines() {
             ref={refArrayAudioTimeTextSync}
           />
         </div>
-        <AudioAndSlider
-          ref={audioRef}
-          audio={data.audio}
-          updateTotalTime={setTotalTime}
-        />
       </div>
+      <AudioAndSlider
+        ref={audioRef}
+        audio={data.audio}
+        updateTotalTime={setTotalTime}
+      />
     </div>
   );
 }

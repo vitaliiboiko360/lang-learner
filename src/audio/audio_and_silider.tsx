@@ -3,8 +3,10 @@ import React from 'react';
 import SliderAudioPlayseek from './slider_audio_playseek.tsx';
 import Audio from './audio.tsx';
 import PlayPauseButton from '../various_controls/play_pause_button.tsx'
-
+import css from './audio.module.scss';
 import { toFixed } from '../etc/util.ts'
+
+import Slider from '@mui/material/Slider';
 
 const AudioAndSlider = React.forwardRef((props, audioRef) => {
   const [totalTime, setTotalTime] = React.useState(0);
@@ -50,16 +52,27 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
     }
   });
 
+  const lineRef = React.useRef();
+
+  React.useEffect(() => {
+    lineRef.current.style.color = document.body.style.background;
+  });
+
   return (<>
-    <Audio ref={audioRef} audio={props.audio} />
-    <PlayPauseButton
-      ref={audioRef}
-    />
-    <SliderAudioPlayseek
-      ref={audioRef}
-      currentTime={currentTime}
-      totalTime={totalTime}
-    />
+    <div>
+      <span ref={lineRef} className={css.bottomLine}><span></span></span>
+      <div style={{ display: 'none' }}>
+        <Audio ref={audioRef} audio={props.audio} />
+        <PlayPauseButton
+          ref={audioRef}
+        />
+        <SliderAudioPlayseek
+          ref={audioRef}
+          currentTime={currentTime}
+          totalTime={totalTime}
+        />
+      </div>
+    </div>
   </>);
 });
 
