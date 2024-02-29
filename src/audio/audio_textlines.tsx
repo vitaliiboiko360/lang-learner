@@ -44,8 +44,8 @@ export default function AudioTextLines() {
   const data = useLoaderData();
 
   React.useEffect(() => {
-    let newColor1 = `#${Math.round(Math.random() * 10000000).toString(16)}`;
-    let newColor2 = `#${Math.round(Math.random() * 10000000).toString(16)}`;
+    let newColor1 = `#${Math.round(Math.random() * 10000000).toString(16).substring(0, 6)}`;
+    let newColor2 = `#${Math.round(Math.random() * 10000000).toString(16).substring(0, 6)}`;
     let angle = Math.round(Math.random() * 360);
 
     let gradient = `linear-gradient(${angle}deg, ${newColor1}40, ${newColor2}40)`;
