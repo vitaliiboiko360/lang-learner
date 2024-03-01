@@ -43,14 +43,22 @@ export default function AudioTextLines() {
 
   const data = useLoaderData();
 
+  function getGradient() {
+    const getRandColorHash = () => {
+      return `#${Array(3).fill(0).map(() => {
+        return Math.floor(Math.random() * 255).toString(16);
+      }).join('')}`;
+    };
+    let color1 = getRandColorHash();
+    let color2 = getRandColorHash();
+
+    let angle = Math.floor(Math.round(Math.random() * 360));
+    let gradient = `linear-gradient(${angle}deg, ${color1}40, ${color2}40)`;
+    return gradient;
+  }
+
   React.useEffect(() => {
-    let newColor1 = `#${Math.round(Math.random() * 10000000).toString(16).substring(0, 6)}`;
-    let newColor2 = `#${Math.round(Math.random() * 10000000).toString(16).substring(0, 6)}`;
-    let angle = Math.round(Math.random() * 360);
-
-    let gradient = `linear-gradient(${angle}deg, ${newColor1}40, ${newColor2}40)`;
-
-    document.body.style.background = gradient;
+    document.body.style.background = getGradient();
     document.body.style.minHeight = '100vw';
     return () => {
       document.body.style.background = '';
