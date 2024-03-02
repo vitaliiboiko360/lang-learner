@@ -9,7 +9,6 @@ const values = [1.0, 0.85, 0.7];
 
 const PlaybackRateDropdown = forwardRef((props, ref) => {
   const ul = React.useRef(null);
-  const opened = React.useRef(null);
   const button = React.useRef(null);
 
   let playbackRate = ref.current ? ref.current.playbackRate : 1;
@@ -18,41 +17,41 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
     playbackRate = ref.current ? ref.current.playbackRate : 1;
   }, [playbackRate]);
 
-  const toggleFunc = () => {
-    if (!opened.current) {
-      button.current.classList.add(css.opened);
-      opened.current = true;
-    } else {
-      button.current.classList.remove(css.opened);
-      opened.current = false;
-    }
+  const toggleFunc = (index) => {
+    let i = index;
+    ul.current.childNodes[i].style.display = '';
+    ul.current.childNodes[++i % 3].style.display = 'none';
+    ul.current.childNodes[++i % 3].style.display = 'none';
   }
-  const onClick = (e, value) => {
+  const openMenu = () => {
+    ul.current.childNodes[0].style.display = '';
+    ul.current.childNodes[1].style.display = '';
+    ul.current.childNodes[2].style.display = '';
+  }
+  const onClick = (e, value, index) => {
     e.stopPropagation();
-    if (opened.current) {
-      if (ref.current) {
-        ref.current.playbackRate = value;
-      }
+    if (ref.current) {
+      ref.current.playbackRate = value;
     }
-    toggleFunc()
+    toggleFunc(index)
   };
 
   return (
-    <button onClick={toggleFunc} className={clsx(css.changeSpeed, css.sm)} ref={button}>
+    <button onClick={openMenu} className={clsx(css.changeSpeed, css.sm)} ref={button}>
       <span>
+        <SpeedIcon>Playback Speed</SpeedIcon>
         <span className={css.changeSpeedcontainer}>
           <ul ref={ul}>
             {values.map((value, index) => {
               return (<li
-                onClick={(e) => onClick(e, value)}
+                style={value == playbackRate ? {} : { display: 'none' }}
+                onClick={(e) => onClick(e, value, index)}
                 data-value={value}
                 key={index}
               >{value}</li>)
             })}
           </ul>
         </span>
-
-        <SpeedIcon>Playback Speed</SpeedIcon>
       </span>
     </button>
   )
