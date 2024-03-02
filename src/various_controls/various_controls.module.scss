@@ -2,36 +2,34 @@
 
 .backHome {
   @include button;
+
+  &>span {
+    align-items: center;
+    white-space: nowrap;
+  }
 }
 
 .changeSpeed {
   @include button;
-  height: 35px;
-  padding-bottom: 0rem;
-  padding-top: 0rem;
-  padding-left: 0;
   transition: all 0.1s linear;
+
+  &>span {
+    align-items: center;
+  }
 
   svg {
     margin-left: 0.5rem;
   }
 
   .changeSpeedcontainer {
-    height: 18px;
     overflow: hidden;
 
     li {
       text-align: center;
       justify-content: center;
-      height: 36px;
-      display: flex;
+      display: inline;
       padding: 0 0.5rem;
-      align-items: center;
       border: 1px solid transparent;
-
-      &+li {
-        border-top: none;
-      }
     }
   }
 
@@ -39,34 +37,9 @@
     transition: all 0.1s linear;
   }
 
-  &.opened {
-    border-top-color: var(--grey);
-
-    &::before {
-      height: 0;
-    }
-
-    ul {
-      /* border: 1px solid var(--grey); */
-      background-color: #fff;
-      transition: all 0.1s linear;
-    }
-
-    li {
-      border: 1px solid var(--grey);
-    }
-
-    .changeSpeedcontainer {
-      overflow: visible;
-
-      li:hover {
-        background-color: var(--greyLight);
-      }
-    }
-  }
+  &.opened {}
 }
 
 .buttonSubmitTimeSyncToServer {
   @include button;
-  position: absolute;
 }

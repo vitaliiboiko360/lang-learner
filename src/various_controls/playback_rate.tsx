@@ -29,11 +29,11 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
   }
   const onClick = (e, value) => {
     e.stopPropagation();
-    // if (opened.current) {
-    //   if (ref.current) { ref.current.playbackRate = value; }
-    //   const calcTranslate = 36 * values.findIndex((v) => v === value)
-    //   ul.current.style.transform = `translateY(-${calcTranslate}px)`;
-    // }
+    if (opened.current) {
+      if (ref.current) {
+        ref.current.playbackRate = value;
+      }
+    }
     toggleFunc()
   };
 
