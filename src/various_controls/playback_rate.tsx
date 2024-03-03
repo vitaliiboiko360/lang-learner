@@ -10,6 +10,7 @@ const values = [1.0, 0.85, 0.7];
 const PlaybackRateDropdown = forwardRef((props, ref) => {
   const ul = React.useRef(null);
   const button = React.useRef(null);
+  const opened = React.useRef(null);
 
   let playbackRate = ref.current ? ref.current.playbackRate : 1;
 
@@ -24,22 +25,27 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
     ul.current.childNodes[++i % 3].style.display = 'none';
   }
   const openMenu = () => {
+    opened.current = true;
     ul.current.childNodes[0].style.display = '';
     ul.current.childNodes[1].style.display = '';
     ul.current.childNodes[2].style.display = '';
   }
   const onClick = (e, value, index) => {
     e.stopPropagation();
-    if (ref.current) {
-      ref.current.playbackRate = value;
+    if (opened.current) {
+      if (ref.current) {
+        ref.current.playbackRate = value;
+      }
+      opened.current = false;
+      toggleFunc(index)
+      return;
     }
-    toggleFunc(index)
+    openMenu();
   };
 
   return (
     <button onClick={openMenu} className={clsx(css.changeSpeed, css.sm)} ref={button}>
       <span>
-        <SpeedIcon>Playback Speed</SpeedIcon>
         <span className={css.changeSpeedcontainer}>
           <ul ref={ul}>
             {values.map((value, index) => {
@@ -52,6 +58,7 @@ const PlaybackRateDropdown = forwardRef((props, ref) => {
             })}
           </ul>
         </span>
+        <SpeedIcon>Playback Speed</SpeedIcon>
       </span>
     </button>
   )
