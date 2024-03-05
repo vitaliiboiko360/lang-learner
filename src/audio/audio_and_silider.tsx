@@ -1,8 +1,5 @@
 import React from 'react';
 
-import SliderAudioPlayseek from './slider_audio_playseek.tsx';
-import Audio from './audio.tsx';
-import PlayPauseButton from '../various_controls/play_pause_button.tsx'
 import css from './audio.module.scss';
 import { toFixed } from '../etc/util.ts'
 
@@ -12,45 +9,45 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
   const [totalTime, setTotalTime] = React.useState(0);
   const [currentTime, setCurrentTime] = React.useState(0);
 
-  React.useEffect(() => {
-    const onLoadedMetadata = () => {
-      // const totalTime = toFixed(audioRef.current.duration, 2);
-      console.log(`audioRef.current.duration ${audioRef.current?.duration}`);
-    }
+  // React.useEffect(() => {
+  //   const onLoadedMetadata = () => {
+  //     // const totalTime = toFixed(audioRef.current.duration, 2);
+  //     console.log(`audioRef.current.duration ${audioRef.current?.duration}`);
+  //   }
 
-    audioRef.current.addEventListener("loadedmetadata", onLoadedMetadata, false);
+  //   audioRef.current.addEventListener("loadedmetadata", onLoadedMetadata, false);
 
-    return () => {
-      if (!audioRef.current)
-        return;
-      audioRef.current.removeEventListener("loadedmetadata", onLoadedMetadata, false);
-    };
-  }, []);
+  //   return () => {
+  //     if (!audioRef.current)
+  //       return;
+  //     audioRef.current.removeEventListener("loadedmetadata", onLoadedMetadata, false);
+  //   };
+  // }, []);
 
-  React.useEffect(() => {
+  // React.useEffect(() => {
 
-    const onTimeUpdateHandler = () => {
-      if (!audioRef.current) {
-        return;
-      }
-      const currentTime = audioRef.current.currentTime;
-      setCurrentTime(toFixed(currentTime, 2));
-    }
+  //   const onTimeUpdateHandler = () => {
+  //     if (!audioRef.current) {
+  //       return;
+  //     }
+  //     const currentTime = audioRef.current.currentTime;
+  //     setCurrentTime(toFixed(currentTime, 2));
+  //   }
 
-    audioRef.current.addEventListener("timeupdate", onTimeUpdateHandler, false);
+  //   audioRef.current.addEventListener("timeupdate", onTimeUpdateHandler, false);
 
-    return () => {
-      if (!audioRef.current)
-        return;
-      audioRef.current.removeEventListener("timeupdate", onTimeUpdateHandler, false);
-    };
-  }, []);
+  //   return () => {
+  //     if (!audioRef.current)
+  //       return;
+  //     audioRef.current.removeEventListener("timeupdate", onTimeUpdateHandler, false);
+  //   };
+  // }, []);
 
-  React.useEffect(() => {
-    if (totalTime > 0) {
-      props.updateTotalTime(totalTime);
-    }
-  });
+  // React.useEffect(() => {
+  //   if (totalTime > 0) {
+  //     props.updateTotalTime(totalTime);
+  //   }
+  // });
 
   const lineRef = React.useRef();
 
@@ -61,7 +58,7 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
   return (<>
     <div>
       <span ref={lineRef} className={css.bottomLine}><span></span></span>
-      <div style={{ display: 'none' }}>
+      {/* <div style={{ display: 'none' }}>
         <Audio ref={audioRef} audio={props.audio} />
         <PlayPauseButton
           ref={audioRef}
@@ -71,7 +68,7 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
           currentTime={currentTime}
           totalTime={totalTime}
         />
-      </div>
+      </div> */}
     </div>
   </>);
 });

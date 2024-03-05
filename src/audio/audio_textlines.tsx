@@ -26,7 +26,6 @@ export default function AudioTextLines() {
 
     const onTimeUpdateHandlerNew = () => {
       if (audioRef.current.currentTime >= parseFloat(endTime)) {
-        console.log(`endTime was ${endTime}`);
         audioRef.current.pause();
         audioRef.current.removeEventListener("timeupdate", onTimeUpdateHandler.current, false);
       }
@@ -38,7 +37,6 @@ export default function AudioTextLines() {
 
   const onClickUserPlayNewStart = function (seconds, end) {
     audioRef.current.currentTime = parseFloat(seconds);
-    console.log(audioRef.current.currentTime);
     updateStopTimeAudio(end);
     audioRef.current.play();
   };
@@ -68,19 +66,17 @@ export default function AudioTextLines() {
   });
 
   React.useEffect(() => {
-    (async () => {
-      const src = `data/${data.audio}`;
-      const blob = await fetch(src)
-        .then((resp) => resp.blob());
-      const audio = new Audio(URL.createObjectURL(blob));
-      audioRef.current = audio;
-      document.body.append(audio);
-      audioRef.current.addEventListener("loadedmetadata", (event) =>
-        console.log(audioRef.current.duration)
-      );
-    })();
-  });
+    const src = `data/${data.audio}`;
+    const blob = await fetch(src)
+      .then((resp) => resp.blob());
+    const audio = new Audio(URL.createObjectURL(blob));
+    audioRef.current = audio;
+    document.body.append(audio);
 
+    audioRef.current.addEventListener("loadedmetadata", (event) =>
+      setTotalTime(audioRef.current.duration)
+    );
+  });
 
   return (
     <div className={css.container}>
@@ -99,11 +95,9 @@ export default function AudioTextLines() {
           />
         </div>
       </div>
-      {/* <AudioAndSlider
-        ref={audioRef}
-        audio={data.audio}
+      <AudioAndSlider
         updateTotalTime={setTotalTime}
-      /> */}
+      />
     </div>
   );
 }
