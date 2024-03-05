@@ -67,7 +67,7 @@ export default function AudioTextLines() {
 
   React.useEffect(() => {
     const src = `data/${data.audio}`;
-    const blob = await fetch(src)
+    const blob = fetch(src)
       .then((resp) => resp.blob());
     const audio = new Audio(URL.createObjectURL(blob));
     audioRef.current = audio;
