@@ -66,16 +66,18 @@ export default function AudioTextLines() {
   });
 
   React.useEffect(() => {
-    const src = `data/${data.audio}`;
-    const blob = fetch(src)
-      .then((resp) => resp.blob());
-    const audio = new Audio(URL.createObjectURL(blob));
-    audioRef.current = audio;
-    document.body.append(audio);
+    (async () => {
+      const src = `data/${data.audio}`;
+      const blob = await fetch(src)
+        .then((resp) => resp.blob());
+      const audio = new Audio(URL.createObjectURL(blob));
+      audioRef.current = audio;
+      document.body.append(audio);
 
-    audioRef.current.addEventListener("loadedmetadata", (event) =>
-      setTotalTime(audioRef.current.duration)
-    );
+      audioRef.current.addEventListener("loadedmetadata", (event) =>
+        setTotalTime(audioRef.current.duration)
+      );
+    })();
   });
 
   return (
