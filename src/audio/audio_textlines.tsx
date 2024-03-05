@@ -26,6 +26,7 @@ export default function AudioTextLines() {
 
     const onTimeUpdateHandlerNew = () => {
       if (audioRef.current.currentTime >= parseFloat(endTime)) {
+        console.log(`endTime was ${endTime}`);
         audioRef.current.pause();
         audioRef.current.removeEventListener("timeupdate", onTimeUpdateHandler.current, false);
       }
@@ -37,6 +38,7 @@ export default function AudioTextLines() {
 
   const onClickUserPlayNewStart = function (seconds, end) {
     audioRef.current.currentTime = parseFloat(seconds);
+    console.log(audioRef.current.currentTime);
     updateStopTimeAudio(end);
     audioRef.current.play();
   };
@@ -65,16 +67,29 @@ export default function AudioTextLines() {
     }
   });
 
+  React.useEffect(() => {
+    (async () => {
+      const src = `data/${data.audio}`;
+      const blob = await fetch(src)
+        .then((resp) => resp.blob());
+      const audio = new Audio(URL.createObjectURL(blob));
+      audioRef.current = audio;
+      document.body.append(audio);
+      audioRef.current.addEventListener("loadedmetadata", (event) =>
+        console.log(audioRef.current.duration)
+      );
+    })();
+  });
+
+
   return (
     <div className={css.container}>
-
       <div className={css.controlTopPanel}>
         <div><BackHomeButton /></div>
-        {/* <ButtonSubmit_AudioTextSyncTime
-        ref={refArrayAudioTimeTextSync} /> */}
+        <ButtonSubmit_AudioTextSyncTime
+          ref={refArrayAudioTimeTextSync} />
         <div><PlaybackRateDropdown ref={audioRef} /></div>
       </div>
-
       <div className={css.page}>
         <div className={css.content}>
           <TextLines
@@ -84,11 +99,11 @@ export default function AudioTextLines() {
           />
         </div>
       </div>
-      <AudioAndSlider
+      {/* <AudioAndSlider
         ref={audioRef}
         audio={data.audio}
         updateTotalTime={setTotalTime}
-      />
+      /> */}
     </div>
   );
 }
