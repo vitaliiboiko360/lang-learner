@@ -56,7 +56,7 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
   });
 
   return (<>
-    <div>
+    <div className={css.bottomLineOuterDiv}>
       <span ref={lineRef} className={css.bottomLine}><span></span></span>
       {/* <div style={{ display: 'none' }}>
         <Audio ref={audioRef} audio={props.audio} />
