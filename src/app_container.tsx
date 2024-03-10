@@ -42,6 +42,13 @@ const router = createBrowserRouter([
             }
             return response.json()
           });
+
+        const audio = await queryClient.fetchQuery([data.audio], async () => {
+          const src = `data/${data.audio}`;
+          const blob = await fetch(src)
+            .then((resp) => resp.blob());
+        });
+
         return data;
       }
       catch (error) {

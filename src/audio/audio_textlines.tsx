@@ -36,7 +36,7 @@ export default function AudioTextLines() {
   }
 
   const onClickUserPlayNewStart = function (seconds, end) {
-    audioRef.current.currentTime = parseFloat(seconds);
+    audioRef.current.currentTime = seconds;
     updateStopTimeAudio(end);
     audioRef.current.play();
   };
@@ -66,6 +66,8 @@ export default function AudioTextLines() {
   });
 
   React.useEffect(() => {
+    if (audioRef.current)
+      return;
     (async () => {
       const src = `data/${data.audio}`;
       const blob = await fetch(src)
@@ -73,6 +75,7 @@ export default function AudioTextLines() {
       const audio = new Audio(URL.createObjectURL(blob));
       audioRef.current = audio;
       document.body.append(audio);
+      console.log(`audio appended to doc`);
 
       audioRef.current.addEventListener("loadedmetadata", (event) =>
         setTotalTime(audioRef.current.duration)
