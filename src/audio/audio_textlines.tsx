@@ -54,7 +54,6 @@ export default function AudioTextLines() {
 
     let angle = Math.floor(Math.round(Math.random() * 360));
     let gradient = `linear-gradient(${angle}deg, ${color1}40, ${color2}40)`;
-    console.log(gradient);
     return gradient;
   }
 
