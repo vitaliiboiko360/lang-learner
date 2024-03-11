@@ -46,7 +46,7 @@ export default function AudioTextLines() {
   function getGradient() {
     const getRandColorHash = () => {
       return `#${Array(3).fill(0).map(() => {
-        return Math.floor(Math.random() * 255).toString(16);
+        return Math.floor(Math.random() * 235).toString(16).padStart(2, "0");
       }).join('')}`;
     };
     let color1 = getRandColorHash();
@@ -54,14 +54,16 @@ export default function AudioTextLines() {
 
     let angle = Math.floor(Math.round(Math.random() * 360));
     let gradient = `linear-gradient(${angle}deg, ${color1}40, ${color2}40)`;
+    console.log(gradient);
     return gradient;
   }
 
   React.useEffect(() => {
-    document.body.style.background = getGradient();
-    document.body.style.minHeight = '100vw';
+    if (document.body.style.background == '')
+      document.body.style.background = getGradient();
     return () => {
-      document.body.style.background = '';
+      if (document.body.style.background != '')
+        document.body.style.background = '';
     }
   });
 
