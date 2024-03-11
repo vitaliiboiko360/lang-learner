@@ -46,7 +46,7 @@ export default function AudioTextLines() {
   function getGradient() {
     const getRandColorHash = () => {
       return `#${Array(3).fill(0).map(() => {
-        return Math.floor(Math.random() * 235).toString(16).padStart(2, "0");
+        return Math.floor(Math.random() * 255).toString(16).padStart(2, "0");
       }).join('')}`;
     };
     let color1 = getRandColorHash();
