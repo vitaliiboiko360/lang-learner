@@ -14,6 +14,7 @@ import css from './audio.module.scss';
 export default function AudioTextLines() {
 
   const audioRef = React.useRef(null);
+  const containerRef = React.useRef(null);
   const onTimeUpdateHandler = React.useRef(null);
   const refArrayAudioTimeTextSync = React.useRef(null);
   const [totalTime, setTotalTime] = React.useState(0);
@@ -75,8 +76,10 @@ export default function AudioTextLines() {
         .then((resp) => resp.blob());
       const audio = new Audio(URL.createObjectURL(blob));
       audioRef.current = audio;
-      document.body.append(audio);
-      console.log(`audio appended to doc`);
+
+      if (containerRef.current) {
+        containerRef.current.append(audio);
+      }
 
       audioRef.current.addEventListener("loadedmetadata", (event) =>
         setTotalTime(audioRef.current.duration)
@@ -85,7 +88,7 @@ export default function AudioTextLines() {
   });
 
   return (
-    <div className={css.container}>
+    <div ref={containerRef} className={css.container}>
       <div className={css.controlTopPanel}>
         <div><BackHomeButton /></div>
         <ButtonSubmit_AudioTextSyncTime
