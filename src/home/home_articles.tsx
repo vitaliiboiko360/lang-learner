@@ -1,34 +1,40 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMemo } from "react";
 import css from './home.module.scss';
 import HomeEntry from './home_entry';
 
-function cutArr(arr, num = 3) {
-    let res = [];
-    res.push(arr.slice(0, num));
-    for (let і = num; і < arr.length; і += (num-1)) {
-        res.push(arr.slice(і, і + (num-1)));
+const HomeArticles = ({ data }) => {
+  const array = useMemo(() => {
+    return data.texts;
+  }, [data]);
+  const row = useRef();
+  const [height, setHeight] = useState('');
+  useEffect(() => {
+    const func = () => {
+      if (row.current) {
+        const children = row.current.children;
+        if (children?.length) {
+          const { width } = children[0]?.getBoundingClientRect();
+          setHeight(width + 'px')
+        }
+      }
     }
-    return res;
-}
-const HomeArticles = ({data}) => {
-    const array = useMemo(() => {
-        return cutArr(data.texts);
-    }, [data]);
-    return <>
+    func();
+    window.addEventListener('resize', func);
+    return () => {
+      window.removeEventListener('resize', func);
+    }
+  }, [])
+  return <div ref={row} className={css.row}>
     {
-        array.map((row, i) => {
-            return <div className={css.row} key={`row_${i}`}>
-                {
-                    row.map((element, index) => {
-                        return <HomeEntry 
-                        num={index}
-                        element={element}
-                        key={`row_${i}_item_${index}`}/>
-                    })
-                }
-            </div>
-        })
-    }</>
+      array.map((element, index) => {
+        return <HomeEntry
+          num={index}
+          height={height}
+          element={element}
+          key={`item_${index}`} />
+      })
+    }
+  </div>
 };
 export default HomeArticles;

@@ -3,6 +3,7 @@ import React from 'react';
 import AudioTextLines from './audio/audio_textlines.tsx';
 import Home from './home/home.tsx';
 import ErrorPage from './error/error.tsx'
+import SvgPage from './svg_page/svg_page.tsx'
 
 import {
   createBrowserRouter,
@@ -41,6 +42,13 @@ const router = createBrowserRouter([
             }
             return response.json()
           });
+
+        const audio = await queryClient.fetchQuery([data.audio], async () => {
+          const src = `data/${data.audio}`;
+          const blob = await fetch(src)
+            .then((resp) => resp.blob());
+        });
+
         return data;
       }
       catch (error) {
@@ -49,6 +57,27 @@ const router = createBrowserRouter([
     },
     errorElement: <ErrorPage />,
   },
+  {
+    path: '/svg',
+    element: <SvgPage />,
+    loader: async ({ request, params }) => {
+      let resource = 'me_gusta_leer';
+      try {
+        const data = await queryClient.fetchQuery([resource],
+          async () => {
+            const response = await fetch(`/data/${resource}.json`)
+            if (!response.ok) {
+              throw new Error(response.statusText);
+            }
+            return response.json()
+          });
+        return data;
+      }
+      catch (error) {
+        throw Error(`Error ${error}`);
+      }
+    },
+  }
 ]);
 
 function AppContainer() {

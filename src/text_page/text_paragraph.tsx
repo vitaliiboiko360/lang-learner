@@ -31,7 +31,7 @@ const TextParagraph = React.forwardRef((props, timePointsRef) => {
     const { width, height, top, left } = spanRef.current.getBoundingClientRect();
     const svgElement = svgRef.current as SVGElement;
     svgElement.style.width = `${Math.ceil(width) + 10}px`;
-    svgElement.style.height = `${Math.ceil(height) + 1}px`;
+    svgElement.style.height = `${Math.ceil(height) + 10}px`;
     svgElement.style.top = Math.ceil(top) + 'px';
     svgElement.style.left = Math.ceil(left) + 'px';
   }, []);

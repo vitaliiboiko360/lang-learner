@@ -13,10 +13,8 @@ import css from './audio.module.scss';
 
 export default function AudioTextLines() {
 
-  // let urlParams = useParams();
-  // console.log(urlParams);
-
   const audioRef = React.useRef(null);
+  const containerRef = React.useRef(null);
   const onTimeUpdateHandler = React.useRef(null);
   const refArrayAudioTimeTextSync = React.useRef(null);
   const [totalTime, setTotalTime] = React.useState(0);
@@ -39,19 +37,64 @@ export default function AudioTextLines() {
   }
 
   const onClickUserPlayNewStart = function (seconds, end) {
-    audioRef.current.currentTime = parseFloat(seconds);
+    audioRef.current.currentTime = seconds;
     updateStopTimeAudio(end);
     audioRef.current.play();
   };
 
   const data = useLoaderData();
 
+  function getGradient() {
+    const getRandColorHash = () => {
+      return `#${Array(3).fill(0).map(() => {
+        return Math.floor(Math.random() * 255).toString(16).padStart(2, "0");
+      }).join('')}`;
+    };
+    let color1 = getRandColorHash();
+    let color2 = getRandColorHash();
+
+    let angle = Math.floor(Math.round(Math.random() * 360));
+    let gradient = `linear-gradient(${angle}deg, ${color1}40, ${color2}40)`;
+    return gradient;
+  }
+
+  React.useEffect(() => {
+    if (document.body.style.background == '')
+      document.body.style.background = getGradient();
+    return () => {
+      if (document.body.style.background != '')
+        document.body.style.background = '';
+    }
+  });
+
+  React.useEffect(() => {
+    if (audioRef.current)
+      return;
+    (async () => {
+      const src = `data/${data.audio}`;
+      const blob = await fetch(src)
+        .then((resp) => resp.blob());
+      const audio = new Audio(URL.createObjectURL(blob));
+      audioRef.current = audio;
+
+      if (containerRef.current) {
+        containerRef.current.append(audio);
+      }
+
+      audioRef.current.addEventListener("loadedmetadata", (event) =>
+        setTotalTime(audioRef.current.duration)
+      );
+    })();
+  });
+
   return (
-    <div className={css.container}>
-      <BackHomeButton />
-      <PlaybackRateDropdown ref={audioRef} />
-      <ButtonSubmit_AudioTextSyncTime
-        ref={refArrayAudioTimeTextSync} />
+    <div ref={containerRef} className={css.container}>
+      <div className={css.controlTopPanel}>
+        <div><BackHomeButton /></div>
+        <ButtonSubmit_AudioTextSyncTime
+          ref={refArrayAudioTimeTextSync} />
+        <div><PlaybackRateDropdown ref={audioRef} /></div>
+      </div>
       <div className={css.page}>
         <div className={css.content}>
           <TextLines
@@ -60,12 +103,10 @@ export default function AudioTextLines() {
             ref={refArrayAudioTimeTextSync}
           />
         </div>
-        <AudioAndSlider
-          ref={audioRef}
-          audio={data.audio}
-          updateTotalTime={setTotalTime}
-        />
       </div>
+      <AudioAndSlider
+        updateTotalTime={setTotalTime}
+      />
     </div>
   );
 }

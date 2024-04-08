@@ -5,59 +5,59 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import clsx from 'clsx';
 import css from './various_controls.module.scss'
 
-const valuesArrayLength = 3;
 const values = [1.0, 0.85, 0.7];
 
 const PlaybackRateDropdown = forwardRef((props, ref) => {
   const ul = React.useRef(null);
-  const opened = React.useRef(null);
   const button = React.useRef(null);
+  const opened = React.useRef(null);
 
   let playbackRate = ref.current ? ref.current.playbackRate : 1;
-
 
   React.useEffect(() => {
     playbackRate = ref.current ? ref.current.playbackRate : 1;
   }, [playbackRate]);
 
-  const toggleFunc = () => {
-    if(!opened.current){
-      button.current.classList.add(css.opened);
-      opened.current = true;
-    } else {
-      button.current.classList.remove(css.opened);
-      opened.current = false;
-    }
+  const toggleFunc = (index) => {
+    let i = index;
+    ul.current.childNodes[i].style.display = '';
+    ul.current.childNodes[++i % 3].style.display = 'none';
+    ul.current.childNodes[++i % 3].style.display = 'none';
   }
-  const onClick = (e, value) => {
+  const openMenu = () => {
+    opened.current = true;
+    ul.current.childNodes[0].style.display = '';
+    ul.current.childNodes[1].style.display = '';
+    ul.current.childNodes[2].style.display = '';
+  }
+  const onClick = (e, value, index) => {
     e.stopPropagation();
-    if(opened.current){
-      if (ref.current) { ref.current.playbackRate = value; }
-      const calcTranslate = 36 * values.findIndex((v) => v === value)
-      ul.current.style.transform = `translateY(-${calcTranslate}px)`;
+    if (opened.current) {
+      if (ref.current) {
+        ref.current.playbackRate = value;
+      }
+      opened.current = false;
+      toggleFunc(index)
+      return;
     }
-    toggleFunc()
+    openMenu();
   };
 
-  
   return (
-    <button onClick={toggleFunc} className={clsx(css.changeSpeed, css.sm)} ref={button}>
+    <button onClick={openMenu} className={clsx(css.changeSpeed, css.sm)} ref={button}>
       <span>
-        <span  className={css.changeSpeedcontainer}>
-          <ul ref={ul} 
-          // style={{transform: `translateY(${20 * values.findIndex((v) => v === playbackRate)})`}}
-          >
+        <span className={css.changeSpeedcontainer}>
+          <ul ref={ul}>
             {values.map((value, index) => {
               return (<li
-                // style={(value != playbackRate) ? { ...styleObj, ...{ 'display': 'none' } } : styleObj}
-                onClick={(e) => onClick(e, value)}
+                style={value == playbackRate ? {} : { display: 'none' }}
+                onClick={(e) => onClick(e, value, index)}
                 data-value={value}
                 key={index}
               >{value}</li>)
             })}
           </ul>
-        </span >
-        
+        </span>
         <SpeedIcon>Playback Speed</SpeedIcon>
       </span>
     </button>

@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const url = require('node:url');
+const morgan = require('morgan');
 
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
+app.use(morgan('combined', { stream: accessLogStream }));
 
 const resourceList = require('./data/list_of_texts.json')
 
