@@ -25,8 +25,9 @@
     @media (max-width: 767px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    .item{
+    .item {
       display: flex;
+      aspect-ratio: 1;
       // min-height: 20rem;
       // @media (max-width: 767px) {
       //   min-height: 14rem;
@@ -34,7 +35,7 @@
       // @media (max-width: 479px) {
       //   min-height: 12rem;
       // }
-      .link{
+      .link {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -42,26 +43,26 @@
         border-radius: 1rem;
         padding: 2.5rem;
         border: 1px solid var(--greyLight);
-        &:hover{
+        &:hover {
           border-color: var(--grey);
         }
         @media (max-width: 767px) {
           padding: 1rem 1.5rem 1.5rem 1rem;
         }
-        
-        .title{
-          font-family: 'Merriweather';
+
+        .title {
+          font-family: "Merriweather";
           font-size: 1.2rem;
           text-align: left;
           margin-bottom: 0.5rem;
+          @include lineClamp(2);
         }
-        .image{
-
+        .image {
           display: flex;
           align-items: flex-end;
           margin-left: auto;
           width: 50%;
-          img{
+          img {
             display: block;
             max-width: 100%;
             // height: 8rem;

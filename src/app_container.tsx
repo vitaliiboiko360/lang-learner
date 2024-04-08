@@ -19,6 +19,7 @@ const router = createBrowserRouter([
     path: "/",
 
     loader: async ({ request, params }) => {
+      window.scrollTo({top: 0});
       return null;
     },
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     path: ":resource",
     element: <AudioTextLines />,
     loader: async ({ request, params }) => {
+      window.scrollTo({top: 0});
       let { resource } = params;
       console.log(resource);
       console.log('calling fetch from loader');

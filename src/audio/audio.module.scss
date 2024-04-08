@@ -28,6 +28,9 @@
   div:last-child {
     margin-left: auto;
   }
+  @media (max-width: 991px) {
+    padding: 0 0.5rem;
+  }
 }
 
 .bottomLineOuterDiv {

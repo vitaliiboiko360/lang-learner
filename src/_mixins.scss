@@ -32,7 +32,6 @@
   color: rgba(0, 0, 0, 0.54);
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
-
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
   }
@@ -41,7 +40,7 @@
     font-size: 1.4rem;
   }
 
-  &>span {
+  & > span {
     display: flex;
     justify-content: center;
   }
@@ -51,8 +50,19 @@
     width: 1.7em;
   }
 
-  & span+svg,
-  & svg+span {
+  & span + svg,
+  & svg + span {
     margin-left: 10px;
   }
+}
+@mixin lineClamp($value) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: $value;
+  -webkit-box-orient: vertical;
+  line-clamp: $value;
+  box-orient: vertical;
 }
