@@ -5,9 +5,7 @@ const PORT = 4001;
 
 module.exports = {
   entry: {
-    app: [
-      './js/main.tsx',
-    ],
+    app: ['./js/main.tsx'],
   },
   output: {
     path: path.resolve(__dirname, 'js'),
@@ -16,7 +14,7 @@ module.exports = {
   },
   watchOptions: {
     aggregateTimeout: 600,
-    ignored: /node_modules/
+    ignored: /node_modules/,
   },
   devServer: {
     port: PORT,
@@ -32,16 +30,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.scss'],
   },
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.js$/,
