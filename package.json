@@ -11,7 +11,7 @@
     "build": "webpack",
     "build:d.ts": "tsc",
     "watch": "webpack --progress --watch",
-    "prepare": "npm run build && npm run build:d.ts",
+    "prepare": "npm run build",
     "start": "webpack-dev-server --progress",
     "tsc": "tsc"
   },
