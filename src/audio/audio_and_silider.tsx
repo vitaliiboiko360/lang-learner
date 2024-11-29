@@ -1,9 +1,7 @@
 import React from 'react';
 
 import css from './audio.module.scss';
-import { toFixed } from '../etc/util.ts'
-
-import Slider from '@mui/material/Slider';
+import { toFixed } from '../etc/util.ts';
 
 const AudioAndSlider = React.forwardRef((props, audioRef) => {
   const [totalTime, setTotalTime] = React.useState(0);
@@ -55,10 +53,13 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
     lineRef.current.style.color = document.body.style.background;
   });
 
-  return (<>
-    <div className={css.bottomLineOuterDiv}>
-      <span ref={lineRef} className={css.bottomLine}><span></span></span>
-      {/* <div style={{ display: 'none' }}>
+  return (
+    <>
+      <div className={css.bottomLineOuterDiv}>
+        <span ref={lineRef} className={css.bottomLine}>
+          <span></span>
+        </span>
+        {/* <div style={{ display: 'none' }}>
         <Audio ref={audioRef} audio={props.audio} />
         <PlayPauseButton
           ref={audioRef}
@@ -69,8 +70,9 @@ const AudioAndSlider = React.forwardRef((props, audioRef) => {
           totalTime={totalTime}
         />
       </div> */}
-    </div>
-  </>);
+      </div>
+    </>
+  );
 });
 
 export default AudioAndSlider;
