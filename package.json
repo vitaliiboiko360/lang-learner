@@ -38,13 +38,13 @@
     "axios": "^1.4.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^4.5.7"
+    "@fontsource/roboto": "^4.5.7",
+    "css-loader": "^6.9.1"
   },
   "dependencies": {
     "@mui/icons-material": "^5.15.3",
     "@reduxjs/toolkit": "^1.9.6",
     "clsx": "^2.1.0",
-    "css-loader": "^6.9.1",
     "node-sass": "^9.0.0",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.3",
