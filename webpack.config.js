@@ -4,6 +4,10 @@ const path = require('path');
 const PORT = 4001;
 
 module.exports = {
+  externals: {
+    react: 'react',
+    'react-dom': 'reactDOM',
+  },
   entry: {
     app: ['./js/main.tsx'],
   },
