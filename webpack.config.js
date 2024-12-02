@@ -1,13 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
+const { type } = require('os');
 
 const PORT = 4001;
 
 module.exports = {
+  externalsType: 'umd',
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
   entry: {
     app: ['./js/main.tsx'],
   },
   output: {
+    library: { type: 'umd' },
     path: path.resolve(__dirname, 'js'),
     publicPath: '/js/',
     filename: 'bundle.js',
