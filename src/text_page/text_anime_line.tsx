@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../store/hooks.ts'
-import { selectActiveIndex, setActiveIndexAction } from '../store/activeIndexSlice.ts';
-import StartEndTime_ValidateAndDisplay from './start_end_time/start_end_time_validate_and_display.tsx'
-import ConditionalLineBreak from './conditional_line_break.tsx'
-import css from './text_page.module.scss'
+import { useAppDispatch, useAppSelector } from '../store/hooks.ts';
+import {
+  selectActiveIndex,
+  setActiveIndexAction,
+} from '../store/activeIndexSlice.ts';
+// import StartEndTime_ValidateAndDisplay from './start_end_time/start_end_time_validate_and_display.tsx';
+import ConditionalLineBreak from './conditional_line_break.tsx';
+import css from './text_page.module.scss';
 
-import { setupAnimation2, cleanupSvgChildren2 } from './anime/line_animation.ts';
-
+import {
+  setupAnimation2,
+  cleanupSvgChildren2,
+} from './anime/line_animation.ts';
 
 const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const [start, setStart] = React.useState(props.start);
@@ -39,18 +44,22 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
   const wordsArray = props.text.split(' ');
   let wordsInSpans = wordsArray.map((word, index) => {
     let leadingSpace = index > 0 ? ' ' : '';
+    let endingSpace = index == wordsArray.length - 1 ? ' ' : '';
     return (
       <>
         <span key={index} className={css.wordStack}>
-          <span key={index + wordsArray.length}>{leadingSpace + word}</span>
+          <span key={index + wordsArray.length}>
+            {leadingSpace + word + endingSpace}
+          </span>
           <svg key={index + wordsArray.length * 2} height='2px' width='0'></svg>
         </span>
       </>
     );
   });
-  return (<>
-    <div key={props.index} style={{ display: 'inline' }}>
-      <StartEndTime_ValidateAndDisplay
+  return (
+    <>
+      <div key={props.index} style={{ display: 'inline' }}>
+        {/* <StartEndTime_ValidateAndDisplay
         index={props.index}
         ref={timePointsRef}
         start={props.start}
@@ -59,12 +68,19 @@ const TextAnimeLine = React.forwardRef((props, timePointsRef) => {
         updateStart={setStart}
         updateEnd={setEnd}
         key={props.index}
-      >
-        <span key={props.index} /*style={{ position: 'relative' }}*/ ref={spanRef} onClick={onClick}>{wordsInSpans}</span>
-      </StartEndTime_ValidateAndDisplay>
-      <ConditionalLineBreak endParagraph={props.endParagraph} />
-    </div >
-  </>);
+      > */}
+        <span
+          key={props.index}
+          /*style={{ position: 'relative' }}*/ ref={spanRef}
+          onClick={onClick}
+        >
+          {wordsInSpans}
+        </span>
+        {/* </StartEndTime_ValidateAndDisplay> */}
+        <ConditionalLineBreak endParagraph={props.endParagraph} />
+      </div>
+    </>
+  );
 });
 
 export default TextAnimeLine;
